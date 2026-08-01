@@ -200,8 +200,21 @@ function speakName(language) {
   const utterance = new SpeechSynthesisUtterance(`欧晋${character}`);
   utterance.lang = language;
   const voices = window.speechSynthesis.getVoices();
-  const preferred = voices.find((voice) => voice.lang.toLowerCase().startsWith(language.toLowerCase())) || voices.find((voice) => voice.lang.toLowerCase().startsWith('zh'));
-  if (preferred) utterance.voice = preferred;
+  const aliases = language === 'zh-CN'
+    ? ['zh-cn', 'cmn-hans-cn', 'cmn-cn', 'zh-hans-cn', 'zh-hans']
+    : ['zh-hk', 'yue-hk', 'yue'];
+  const preferred = voices.find((voice) => {
+    const voiceLanguage = voice.lang.toLowerCase();
+    return aliases.some((alias) => voiceLanguage === alias || voiceLanguage.startsWith(`${alias}-`));
+  });
+  if (!preferred) {
+    status.textContent = language === 'zh-CN'
+      ? '未检测到普通话语音，请在设备系统中安装中文（普通话）语音包。'
+      : '未检测到粤语语音，请在设备系统中安装粤语语音包。';
+    status.classList.add('is-error');
+    return;
+  }
+  utterance.voice = preferred;
   window.speechSynthesis.cancel();
   window.speechSynthesis.speak(utterance);
 }

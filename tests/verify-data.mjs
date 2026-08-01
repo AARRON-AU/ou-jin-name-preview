@@ -17,6 +17,8 @@ if (byChar.size !== 40) errors.push('Candidate characters must be unique.');
 const siblingCount = (source.match(/siblingItem\(/g) || []).length - 1;
 if (siblingCount < 20) errors.push(`Expected at least 20 sibling candidates, found ${siblingCount}.`);
 if (!source.includes('SpeechSynthesisUtterance(`欧晋${character}`)')) errors.push('Speech should use 欧晋X for both reading modes.');
+if (source.includes("|| voices.find((voice) => voice.lang.toLowerCase().startsWith('zh'))")) errors.push('Speech must not fall back to an arbitrary Chinese voice.');
+if (!source.includes("'cmn-hans-cn'") || !source.includes("'yue-hk'")) errors.push('Speech language aliases are incomplete.');
 
 for (const item of candidates) {
   const total = item.bazi + item.meaning + item.sound + item.brother;
