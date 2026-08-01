@@ -41,16 +41,38 @@ const candidates = [
   { char: '溯', group: '水', jyutping: 'Sou3', bazi: 28, meaning: 26, sound: 25, brother: 0, meaningText: '溯有追本溯源、向上求索之意，理性有方向。', soundText: 'Au1 Zeon3 Sou3：元音开阔，收尾明快。', brotherText: '暂未发现与“恺”构成的自然正向词语。' }
 ];
 
+function siblingItem(char, relationship, jyutping, phrase, meaningText, bazi, meaning, sound, brother) {
+  return {
+    char, group: '兄弟呼应', relationship, jyutping, bazi, meaning, sound, brother,
+    meaningText, soundText: `Au1 Zeon3 ${jyutping}：${sound}`, brotherText: `“恺${char}”可联想到“${phrase}”。`
+  };
+}
+
 const siblingCandidates = [
-  { char: '歌', group: '兄弟呼应', relationship: 'strong', jyutping: 'Go1', bazi: 18, meaning: 23, sound: 28, brother: 15, meaningText: '歌有凯歌、歌咏之意，明朗有文化气息。', soundText: 'Au1 Zeon3 Go1：收尾高平，音色明亮好叫。', brotherText: '“恺歌”谐音“凯歌”，寓意胜利与喜悦。' },
-  { char: '悌', group: '兄弟呼应', relationship: 'strong', jyutping: 'Tai5', bazi: 17, meaning: 24, sound: 25, brother: 15, meaningText: '悌指敬爱兄长、兄弟和睦，寓意非常直接。', soundText: 'Au1 Zeon3 Tai5：尾音稳重，但“悌”字较少见。', brotherText: '“恺悌”是直接成词，指和乐平易、兄弟友爱。' },
-  { char: '乐', group: '兄弟呼应', relationship: 'related', jyutping: 'Lok6', bazi: 17, meaning: 23, sound: 26, brother: 12, meaningText: '乐有喜乐、和乐之意，亲切开朗。', soundText: 'Au1 Zeon3 Lok6：入声结尾利落，呼叫感强。', brotherText: '“恺乐”谐音“凯乐”，有胜利之乐的古典语感。' },
-  { char: '捷', group: '兄弟呼应', relationship: 'related', jyutping: 'Zip6', bazi: 21, meaning: 23, sound: 25, brother: 12, meaningText: '捷有敏捷、胜捷之意，现代而有行动力。', soundText: 'Au1 Zeon3 Zip6：短音清晰，整体利落。', brotherText: '“恺捷”谐音“凯捷”，可理解为胜利与捷报。' },
-  { char: '颂', group: '兄弟呼应', relationship: 'related', jyutping: 'Zung6', bazi: 18, meaning: 24, sound: 24, brother: 9, meaningText: '颂有赞美、颂扬之意，气质庄重。', soundText: 'Au1 Zeon3 Zung6：鼻尾收束沉着，风格较成熟。', brotherText: '“恺颂”可作“凯颂”的谐音联想，关联较弱。' },
-  { char: '胜', group: '兄弟呼应', relationship: 'related', jyutping: 'Sing3', bazi: 17, meaning: 23, sound: 25, brother: 9, meaningText: '胜有胜任、胜利之意，目标感与力量感较强。', soundText: 'Au1 Zeon3 Sing3：去声收尾清楚，名字有力度。', brotherText: '“恺胜”可作“凯胜”的谐音联想，属于弱关联。' }
+  siblingItem('旋', 'strong', 'Syun4', '凯旋', '旋有回环、周全与凯旋之意，利落而不失文气。', 30, 25, 27, 15),
+  siblingItem('风', 'strong', 'Fung1', '凯风', '风取风度、教化与开阔气象，清雅有古意。', 30, 25, 29, 15),
+  siblingItem('歌', 'strong', 'Go1', '凯歌', '歌有凯歌、歌咏之意，明朗有文化气息。', 18, 23, 28, 15),
+  siblingItem('捷', 'related', 'Zit6', '凯捷', '捷有敏捷、胜捷之意，现代而有行动力。', 21, 23, 25, 12),
+  siblingItem('乐', 'related', 'Lok6', '凯乐', '乐有喜乐、和乐之意，亲切开朗。', 17, 23, 26, 12),
+  siblingItem('泽', 'related', 'Zaak6', '凯泽', '泽有润泽、恩泽之意，可联想到凯泽之名。', 30, 25, 27, 9),
+  siblingItem('瑞', 'related', 'Seoi6', '凯瑞', '瑞有祥瑞之意，凯瑞是常见的吉祥组合。', 22, 24, 26, 9),
+  siblingItem('模', 'strong', 'Mou4', '楷模', '模取楷模，寓意有标准、有榜样力量。', 18, 25, 24, 15),
+  siblingItem('书', 'strong', 'Syu1', '楷书', '书取楷书，寓意端正、清晰、有文化底蕴。', 18, 25, 27, 15),
+  siblingItem('体', 'related', 'Tai2', '楷体', '体取楷体，寓意端庄有形、持正守则。', 17, 22, 25, 12),
+  siblingItem('法', 'related', 'Faat3', '楷法', '法取楷法，寓意有规范、有原则。', 17, 23, 24, 12),
+  siblingItem('则', 'related', 'Zak1', '楷则', '则取楷则，寓意守正、可为准则。', 17, 24, 25, 12),
+  siblingItem('切', 'strong', 'Cit3', '恺切', '切取恺切，寓意真诚恳切、待人坦荡。', 18, 24, 25, 15),
+  siblingItem('悌', 'strong', 'Tai5', '恺悌', '悌指敬爱兄长、兄弟和睦，寓意非常直接。', 17, 25, 25, 15),
+  siblingItem('然', 'strong', 'Jin4', '慨然', '然取慨然，寓意爽朗、慷慨、有担当。', 18, 24, 26, 15),
+  siblingItem('叹', 'related', 'Taan3', '慨叹', '叹取慨叹，文字关联明确，但日常名字感较弱。', 17, 20, 24, 12),
+  siblingItem('慷', 'strong', 'Hong2', '慷慨', '慷与慨组成慷慨，寓意大方、有气度。', 17, 25, 23, 15),
+  siblingItem('愉', 'strong', 'Jyu4', '恺愉', '愉取恺愉，寓意和悦、愉快、心境开朗。', 18, 24, 27, 15),
+  siblingItem('安', 'related', 'On1', '凯安', '安取凯安，寓意平安、安定，组合偏名字化。', 18, 24, 28, 9),
+  siblingItem('宁', 'related', 'Ning4', '凯宁', '宁取凯宁，寓意安宁从容，组合偏名字化。', 18, 24, 26, 9),
+  siblingItem('康', 'related', 'Hong1', '凯康', '康取凯康，寓意健康、安康，组合偏名字化。', 18, 24, 25, 9)
 ];
 
-const allCandidates = [...candidates, ...siblingCandidates];
+const allCandidates = [...siblingCandidates, ...candidates];
 const candidateMap = new Map(allCandidates.map((item) => [item.char, item]));
 const groups = ['金', '水', '兄弟呼应'];
 const elements = {
@@ -74,23 +96,36 @@ const brotherText = document.querySelector('#brother-text');
 const mandarinSpeak = document.querySelector('#mandarin-speak');
 const cantoneseSpeak = document.querySelector('#cantonese-speak');
 
-const relationshipMap = new Map(allCandidates.filter((item) => item.brother > 0).map((item) => [item.char, item]));
+const relationshipMap = new Map(siblingCandidates.filter((item) => item.brother > 0).map((item) => [item.char, item]));
+
+const manualElementProfiles = new Map([
+  ['海', { group: '水', label: '海水意象' }], ['江', { group: '水', label: '江河意象' }], ['河', { group: '水', label: '江河意象' }],
+  ['涛', { group: '水', label: '水势意象' }], ['淼', { group: '水', label: '水势意象' }], ['浩', { group: '水', label: '浩水意象' }],
+  ['鑫', { group: '金', label: '三金字形' }], ['金', { group: '金', label: '金字形' }], ['银', { group: '金', label: '金属意象' }],
+  ['锋', { group: '金', label: '金属字形' }], ['钰', { group: '金', label: '金属字形' }]
+]);
 
 function makeEstimatedItem(character) {
   const relation = relationshipMap.get(character);
+  const profile = manualElementProfiles.get(character);
+  const elementName = profile?.group || '中性';
+  const bazi = profile?.group === '水' ? 30 : profile?.group === '金' ? 28 : 18;
+  const meaning = profile ? 22 : 20;
+  const sound = 18;
   return {
     char: character,
-    group: '未收录',
+    group: profile?.group || '未收录',
     relationship: relation?.relationship,
     jyutping: '待核对',
-    bazi: 18,
-    meaning: 20,
-    sound: 18,
+    bazi,
+    meaning,
+    sound,
     brother: relation?.brother || 0,
-    meaningText: '该字不在精选字库中，寓意与气质暂按中性估算；建议结合家人实际偏好复核。',
-    soundText: '粤语读音尚未收录，暂按中性估算；请以本地家庭实际读音复核。',
+    meaningText: profile ? `该字未在精选字库中，但按“${profile.label}”归入${elementName}方向；寓意项采用保守基准 ${meaning}/25。` : `该字未在精选字库中，也未命中金水字形规则；寓意项采用保守中性基准 ${meaning}/25。`,
+    soundText: `粤语读音尚未收录，因此音律项按基础 ${sound}/30 计分；请以本地家庭实际读音复核。`,
     brotherText: relation ? relation.brotherText : '暂未收录与“恺”组成词语或正向谐音的资料。',
-    estimated: true
+    estimated: true,
+    evidenceText: profile ? `八字项依据：${profile.label} → ${elementName}方向，${bazi}/30。` : `八字项依据：未命中金水字形规则，采用中性保守值 ${bazi}/30。`
   };
 }
 
@@ -99,7 +134,7 @@ function buildCandidates() {
     const source = group === '兄弟呼应' ? siblingCandidates : candidates;
     const items = source.filter((item) => item.group === group);
     const buttons = items.map((item) => {
-      const relationship = item.relationship || relationshipMap.get(item.char)?.relationship;
+      const relationship = group === '兄弟呼应' ? null : item.relationship || relationshipMap.get(item.char)?.relationship;
       const relationClass = relationship === 'strong' ? ' relationship-strong' : relationship === 'related' ? ' relationship-related' : '';
       return `<button class="candidate${relationClass}" type="button" data-char="${item.char}" aria-pressed="false" aria-label="选择 区晋${item.char}">${item.char}</button>`;
     }).join('');
@@ -147,10 +182,10 @@ function setSelection(character) {
     scoreRow('粤语听感', item.sound, 30),
     scoreRow('与“恺”呼应', brotherScore, 15)
   ].join('');
-  meaningText.textContent = item.meaningText;
+  meaningText.textContent = item.estimated ? `${item.meaningText} ${item.evidenceText}` : item.meaningText;
   soundText.textContent = item.soundText;
   brotherText.textContent = item.brotherText;
-  status.textContent = item.estimated ? '未收录：已给出中性估算，粤语读音与字义建议人工复核。' : '已收录：可查看完整评分依据。';
+  status.textContent = item.estimated ? '未收录：已按内置金水/中性规则给出可解释估算，粤语读音仍建议人工复核。' : '已收录：可查看完整评分依据。';
   status.classList.toggle('is-error', Boolean(item.estimated));
 }
 
@@ -162,7 +197,7 @@ function speakName(language) {
   }
   const character = Array.from(input.value.trim())[0];
   if (!character) return;
-  const utterance = new SpeechSynthesisUtterance(language === 'zh-HK' ? `欧晋${character}` : `区晋${character}`);
+  const utterance = new SpeechSynthesisUtterance(`欧晋${character}`);
   utterance.lang = language;
   const voices = window.speechSynthesis.getVoices();
   const preferred = voices.find((voice) => voice.lang.toLowerCase().startsWith(language.toLowerCase())) || voices.find((voice) => voice.lang.toLowerCase().startsWith('zh'));

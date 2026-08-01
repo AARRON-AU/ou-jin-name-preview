@@ -14,6 +14,9 @@ const byChar = new Map(candidates.map((item) => [item.char, item]));
 
 if (candidates.length !== 40) errors.push(`Expected 40 candidates, found ${candidates.length}.`);
 if (byChar.size !== 40) errors.push('Candidate characters must be unique.');
+const siblingCount = (source.match(/siblingItem\(/g) || []).length - 1;
+if (siblingCount < 20) errors.push(`Expected at least 20 sibling candidates, found ${siblingCount}.`);
+if (!source.includes('SpeechSynthesisUtterance(`欧晋${character}`)')) errors.push('Speech should use 欧晋X for both reading modes.');
 
 for (const item of candidates) {
   const total = item.bazi + item.meaning + item.sound + item.brother;
