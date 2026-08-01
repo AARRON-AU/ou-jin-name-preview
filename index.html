@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123b37">
+  <title>区晋名字预览</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page-shell">
+    <header class="hero">
+      <p class="eyebrow">名字预览 · 粤语地区</p>
+      <h1>区晋名字评分</h1>
+      <p>固定前缀“区晋”，挑一个末字，看看名字的整体感觉。</p>
+    </header>
+
+    <section class="name-panel" aria-labelledby="name-heading">
+      <div>
+        <p id="name-heading" class="section-label">正在预览</p>
+        <output id="name-display" class="full-name" aria-live="polite">区晋旋</output>
+        <p id="cantonese-reading" class="reading">粤语：Au1 Zeon3 Syun4</p>
+      </div>
+      <div class="score-orb" aria-label="总分 96 分">
+        <strong id="total-score">96</strong><span>/100</span>
+      </div>
+    </section>
+
+    <section class="entry-section" aria-labelledby="entry-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">选择或输入</p>
+          <h2 id="entry-heading">第三个字</h2>
+        </div>
+        <p class="input-note">仅支持一个汉字</p>
+      </div>
+      <label class="input-wrap" for="character-input">
+        <span class="prefix" aria-hidden="true">区晋</span>
+        <input id="character-input" inputmode="text" maxlength="1" autocomplete="off" value="旋" aria-describedby="input-status">
+      </label>
+      <p id="input-status" class="status" aria-live="polite">已收录：可查看完整评分依据。</p>
+    </section>
+
+    <section class="choices-section" aria-labelledby="choices-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">40 个筛选候选</p>
+          <h2 id="choices-heading">末字字库</h2>
+        </div>
+      </div>
+      <div id="candidate-groups" class="candidate-groups"></div>
+    </section>
+
+    <section id="result-section" class="result-section" aria-labelledby="result-heading">
+      <div class="section-heading result-title">
+        <div>
+          <p class="eyebrow">评分明细</p>
+          <h2 id="result-heading">为什么是这个分数</h2>
+        </div>
+        <span id="element-badge" class="element-badge">金</span>
+      </div>
+      <div id="score-breakdown" class="breakdown" aria-live="polite"></div>
+      <div class="insight-grid">
+        <article>
+          <p class="card-label">字义与气质</p>
+          <p id="meaning-text"></p>
+        </article>
+        <article>
+          <p class="card-label">粤语听感</p>
+          <p id="sound-text"></p>
+        </article>
+        <article class="brother-card">
+          <p class="card-label">与哥哥“恺”的呼应</p>
+          <p id="brother-text"></p>
+        </article>
+      </div>
+    </section>
+
+    <aside class="notice" aria-label="使用说明">
+      <strong>传统命名参考</strong>
+      <span>评分按金、水优先的取名方向设计，仅供起名时比较字义、读音与兄弟呼应，不作命运判断。未收录字不会自动打分，避免给出不可靠结论。</span>
+    </aside>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
