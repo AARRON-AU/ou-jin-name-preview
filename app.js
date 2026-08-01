@@ -41,11 +41,22 @@ const candidates = [
   { char: '溯', group: '水', jyutping: 'Sou3', bazi: 28, meaning: 26, sound: 25, brother: 0, meaningText: '溯有追本溯源、向上求索之意，理性有方向。', soundText: 'Au1 Zeon3 Sou3：元音开阔，收尾明快。', brotherText: '暂未发现与“恺”构成的自然正向词语。' }
 ];
 
-const candidateMap = new Map(candidates.map((item) => [item.char, item]));
-const groups = ['金', '水'];
+const siblingCandidates = [
+  { char: '歌', group: '兄弟呼应', relationship: 'strong', jyutping: 'Go1', bazi: 18, meaning: 23, sound: 28, brother: 15, meaningText: '歌有凯歌、歌咏之意，明朗有文化气息。', soundText: 'Au1 Zeon3 Go1：收尾高平，音色明亮好叫。', brotherText: '“恺歌”谐音“凯歌”，寓意胜利与喜悦。' },
+  { char: '悌', group: '兄弟呼应', relationship: 'strong', jyutping: 'Tai5', bazi: 17, meaning: 24, sound: 25, brother: 15, meaningText: '悌指敬爱兄长、兄弟和睦，寓意非常直接。', soundText: 'Au1 Zeon3 Tai5：尾音稳重，但“悌”字较少见。', brotherText: '“恺悌”是直接成词，指和乐平易、兄弟友爱。' },
+  { char: '乐', group: '兄弟呼应', relationship: 'related', jyutping: 'Lok6', bazi: 17, meaning: 23, sound: 26, brother: 12, meaningText: '乐有喜乐、和乐之意，亲切开朗。', soundText: 'Au1 Zeon3 Lok6：入声结尾利落，呼叫感强。', brotherText: '“恺乐”谐音“凯乐”，有胜利之乐的古典语感。' },
+  { char: '捷', group: '兄弟呼应', relationship: 'related', jyutping: 'Zip6', bazi: 21, meaning: 23, sound: 25, brother: 12, meaningText: '捷有敏捷、胜捷之意，现代而有行动力。', soundText: 'Au1 Zeon3 Zip6：短音清晰，整体利落。', brotherText: '“恺捷”谐音“凯捷”，可理解为胜利与捷报。' },
+  { char: '颂', group: '兄弟呼应', relationship: 'related', jyutping: 'Zung6', bazi: 18, meaning: 24, sound: 24, brother: 9, meaningText: '颂有赞美、颂扬之意，气质庄重。', soundText: 'Au1 Zeon3 Zung6：鼻尾收束沉着，风格较成熟。', brotherText: '“恺颂”可作“凯颂”的谐音联想，关联较弱。' },
+  { char: '胜', group: '兄弟呼应', relationship: 'related', jyutping: 'Sing3', bazi: 17, meaning: 23, sound: 25, brother: 9, meaningText: '胜有胜任、胜利之意，目标感与力量感较强。', soundText: 'Au1 Zeon3 Sing3：去声收尾清楚，名字有力度。', brotherText: '“恺胜”可作“凯胜”的谐音联想，属于弱关联。' }
+];
+
+const allCandidates = [...candidates, ...siblingCandidates];
+const candidateMap = new Map(allCandidates.map((item) => [item.char, item]));
+const groups = ['金', '水', '兄弟呼应'];
 const elements = {
   '金': '金 · 优先补益方向',
-  '水': '水 · 优先补益方向'
+  '水': '水 · 优先补益方向',
+  '兄弟呼应': '与“恺”组成词语或谐音'
 };
 
 const input = document.querySelector('#character-input');
@@ -60,11 +71,39 @@ const badge = document.querySelector('#element-badge');
 const meaningText = document.querySelector('#meaning-text');
 const soundText = document.querySelector('#sound-text');
 const brotherText = document.querySelector('#brother-text');
+const mandarinSpeak = document.querySelector('#mandarin-speak');
+const cantoneseSpeak = document.querySelector('#cantonese-speak');
+
+const relationshipMap = new Map(allCandidates.filter((item) => item.brother > 0).map((item) => [item.char, item]));
+
+function makeEstimatedItem(character) {
+  const relation = relationshipMap.get(character);
+  return {
+    char: character,
+    group: '未收录',
+    relationship: relation?.relationship,
+    jyutping: '待核对',
+    bazi: 18,
+    meaning: 20,
+    sound: 18,
+    brother: relation?.brother || 0,
+    meaningText: '该字不在精选字库中，寓意与气质暂按中性估算；建议结合家人实际偏好复核。',
+    soundText: '粤语读音尚未收录，暂按中性估算；请以本地家庭实际读音复核。',
+    brotherText: relation ? relation.brotherText : '暂未收录与“恺”组成词语或正向谐音的资料。',
+    estimated: true
+  };
+}
 
 function buildCandidates() {
-  groupContainer.innerHTML = groups.map((group) => {
-    const items = candidates.filter((item) => item.group === group);
-    return `<div class="candidate-group"><h3 class="group-title">${group}字 <span>${elements[group]}</span></h3><div class="candidate-grid">${items.map((item) => `<button class="candidate" type="button" data-char="${item.char}" aria-pressed="false" aria-label="选择 区晋${item.char}">${item.char}</button>`).join('')}</div></div>`;
+  groupContainer.innerHTML = groups.map((group, index) => {
+    const source = group === '兄弟呼应' ? siblingCandidates : candidates;
+    const items = source.filter((item) => item.group === group);
+    const buttons = items.map((item) => {
+      const relationship = item.relationship || relationshipMap.get(item.char)?.relationship;
+      const relationClass = relationship === 'strong' ? ' relationship-strong' : relationship === 'related' ? ' relationship-related' : '';
+      return `<button class="candidate${relationClass}" type="button" data-char="${item.char}" aria-pressed="false" aria-label="选择 区晋${item.char}">${item.char}</button>`;
+    }).join('');
+    return `<details class="candidate-group"${index < 2 ? ' open' : ''}><summary><h3 class="group-title">${group}字 <span>${elements[group]}</span></h3></summary><div class="candidate-grid">${buttons}</div></details>`;
   }).join('');
 }
 
@@ -74,7 +113,7 @@ function scoreRow(label, score, max) {
 }
 
 function setSelection(character) {
-  const item = candidateMap.get(character);
+  const item = candidateMap.get(character) || (character ? makeEstimatedItem(character) : null);
   nameDisplay.textContent = `区晋${character || '□'}`;
   input.value = character;
   document.querySelectorAll('.candidate').forEach((button) => {
@@ -83,34 +122,53 @@ function setSelection(character) {
 
   if (!item) {
     totalScore.textContent = '—';
-    scoreOrb.setAttribute('aria-label', '待核对，暂不评分');
-    reading.textContent = character ? '粤语：待核对' : '请输入一个第三个字';
-    badge.textContent = '待核对';
+    scoreOrb.setAttribute('aria-label', '请输入第三个字');
+    reading.textContent = '粤语：待核对';
+    badge.textContent = '待输入';
     breakdown.innerHTML = '';
-    meaningText.textContent = '该字未收录在本次筛选字库中，暂不对字义或五行作自动判断。';
-    soundText.textContent = '请以当地家庭日常粤语发音为准；未核对读音时不提供音律分。';
-    brotherText.textContent = '未核对“恺＋该字”是否能组成自然词语或正向谐音。';
-    status.textContent = character ? '该字未收录：建议先核对粤语读音、字义与五行取向。' : '请输入一个已收录的第三个字。';
-    status.classList.toggle('is-error', Boolean(character));
+    meaningText.textContent = '请输入一个汉字后查看评分。';
+    soundText.textContent = '请输入一个汉字后查看评分。';
+    brotherText.textContent = '请输入一个汉字后查看评分。';
+    status.textContent = '请输入一个第三个字。';
+    status.classList.remove('is-error');
     return;
   }
 
-  const total = item.bazi + item.meaning + item.sound + item.brother;
+  const meaningScore = Math.min(item.meaning, 25);
+  const brotherScore = Math.min(15, Math.round(item.brother * 1.5));
+  const total = item.bazi + meaningScore + item.sound + brotherScore;
   totalScore.textContent = total;
   scoreOrb.setAttribute('aria-label', `总分 ${total} 分`);
   reading.textContent = `粤语：Au1 Zeon3 ${item.jyutping}`;
-  badge.textContent = item.group;
+  badge.textContent = item.estimated ? '估算' : item.group;
   breakdown.innerHTML = [
     scoreRow('八字结合度', item.bazi, 30),
-    scoreRow('寓意与气质', item.meaning, 30),
+    scoreRow('寓意与气质', meaningScore, 25),
     scoreRow('粤语听感', item.sound, 30),
-    scoreRow('与“恺”呼应', item.brother, 10)
+    scoreRow('与“恺”呼应', brotherScore, 15)
   ].join('');
   meaningText.textContent = item.meaningText;
   soundText.textContent = item.soundText;
   brotherText.textContent = item.brotherText;
-  status.textContent = '已收录：可查看完整评分依据。';
-  status.classList.remove('is-error');
+  status.textContent = item.estimated ? '未收录：已给出中性估算，粤语读音与字义建议人工复核。' : '已收录：可查看完整评分依据。';
+  status.classList.toggle('is-error', Boolean(item.estimated));
+}
+
+function speakName(language) {
+  if (!('speechSynthesis' in window)) {
+    status.textContent = '当前浏览器不支持语音朗读。';
+    status.classList.add('is-error');
+    return;
+  }
+  const character = Array.from(input.value.trim())[0];
+  if (!character) return;
+  const utterance = new SpeechSynthesisUtterance(language === 'zh-HK' ? `欧晋${character}` : `区晋${character}`);
+  utterance.lang = language;
+  const voices = window.speechSynthesis.getVoices();
+  const preferred = voices.find((voice) => voice.lang.toLowerCase().startsWith(language.toLowerCase())) || voices.find((voice) => voice.lang.toLowerCase().startsWith('zh'));
+  if (preferred) utterance.voice = preferred;
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(utterance);
 }
 
 buildCandidates();
@@ -124,5 +182,8 @@ input.addEventListener('input', () => {
   if (input.value !== value) input.value = value;
   setSelection(value);
 });
+
+mandarinSpeak.addEventListener('click', () => speakName('zh-CN'));
+cantoneseSpeak.addEventListener('click', () => speakName('zh-HK'));
 
 setSelection('旋');

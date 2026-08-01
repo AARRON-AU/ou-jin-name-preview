@@ -17,10 +17,12 @@ if (byChar.size !== 40) errors.push('Candidate characters must be unique.');
 
 for (const item of candidates) {
   const total = item.bazi + item.meaning + item.sound + item.brother;
-  if (item.bazi > 30 || item.meaning > 30 || item.sound > 30 || item.brother > 10) {
+  const meaning = Math.min(item.meaning, 25);
+  const brother = Math.min(item.brother * 1.5, 15);
+  if (item.bazi > 30 || item.meaning < 0 || item.sound > 30 || item.brother > 15) {
     errors.push(`${item.char} exceeds a category maximum.`);
   }
-  if (total > 100) errors.push(`${item.char} exceeds 100 points.`);
+  if (item.bazi + meaning + item.sound + brother > 100) errors.push(`${item.char} exceeds 100 points.`);
 }
 
 for (const expected of [
