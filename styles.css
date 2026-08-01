@@ -38,6 +38,7 @@ h2 { margin: 3px 0 0; font-size: 1.15rem; }
 .speech-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 13px; }
 .speech-button { padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--jade); background: var(--surface); cursor: pointer; font-size: .8rem; }
 .speech-button:hover, .speech-button:focus-visible { border-color: var(--jade); background: var(--jade-soft); }
+.speech-status { min-height: 1.3em; margin: 7px 0 0; color: var(--muted); font-size: .76rem; }
 .score-orb { display: grid; grid-template-columns: auto auto; align-items: baseline; flex: 0 0 auto; width: 100px; height: 100px; padding-top: 2px; place-content: center; border: 7px solid var(--jade); border-radius: 50%; color: var(--jade); }
 .score-orb strong { font-size: 2.35rem; line-height: 1; letter-spacing: -.06em; }
 .score-orb span { font-size: .75rem; }

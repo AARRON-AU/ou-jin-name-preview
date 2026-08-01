@@ -95,6 +95,7 @@ const soundText = document.querySelector('#sound-text');
 const brotherText = document.querySelector('#brother-text');
 const mandarinSpeak = document.querySelector('#mandarin-speak');
 const cantoneseSpeak = document.querySelector('#cantonese-speak');
+const speechStatus = document.querySelector('#speech-status');
 
 const relationshipMap = new Map(siblingCandidates.filter((item) => item.brother > 0).map((item) => [item.char, item]));
 
@@ -192,11 +193,13 @@ function setSelection(character) {
 function speakName(language) {
   if (!('speechSynthesis' in window)) {
     status.textContent = '当前浏览器不支持语音朗读。';
+    speechStatus.textContent = '当前浏览器不支持语音朗读。';
     status.classList.add('is-error');
     return;
   }
   const character = Array.from(input.value.trim())[0];
   if (!character) return;
+  window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(`欧晋${character}`);
   utterance.lang = language;
   const voices = window.speechSynthesis.getVoices();
@@ -205,17 +208,25 @@ function speakName(language) {
     : ['zh-hk', 'yue-hk', 'yue'];
   const preferred = voices.find((voice) => {
     const voiceLanguage = voice.lang.toLowerCase();
-    return aliases.some((alias) => voiceLanguage === alias || voiceLanguage.startsWith(`${alias}-`));
+    const voiceName = voice.name.toLowerCase();
+    const exactLanguage = aliases.some((alias) => voiceLanguage === alias || voiceLanguage.startsWith(`${alias}-`));
+    const explicitlyWrong = language === 'zh-CN'
+      ? /粤语|cantonese|yue|hong kong|香港|廣東/.test(voiceName)
+      : /普通话|mandarin|mainland|simplified|中国大陆|普通話/.test(voiceName);
+    return exactLanguage && !explicitlyWrong;
   });
   if (!preferred) {
-    status.textContent = language === 'zh-CN'
+    const message = language === 'zh-CN'
       ? '未检测到普通话语音，请在设备系统中安装中文（普通话）语音包。'
       : '未检测到粤语语音，请在设备系统中安装粤语语音包。';
+    status.textContent = message;
+    speechStatus.textContent = message;
     status.classList.add('is-error');
     return;
   }
   utterance.voice = preferred;
-  window.speechSynthesis.cancel();
+  speechStatus.textContent = `${language === 'zh-CN' ? '普通话' : '粤语'}：${preferred.name}（${preferred.lang}）`;
+  status.classList.remove('is-error');
   window.speechSynthesis.speak(utterance);
 }
 
