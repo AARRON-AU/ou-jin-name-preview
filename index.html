@@ -24,10 +24,31 @@
           <button id="cantonese-speak" class="speech-button" type="button">粤语读音</button>
         </div>
         <p id="speech-status" class="speech-status" aria-live="polite">粤语按钮使用设备粤语语音。</p>
+        <div class="vote-add-row">
+          <button id="vote-add-current" class="vote-add-button" type="button">加入区晋旋</button>
+          <span id="vote-progress" class="vote-progress">已选 0/3</span>
+        </div>
       </div>
       <div class="score-orb" aria-label="总分 97 分">
         <strong id="total-score">97</strong><span>/100</span>
       </div>
+    </section>
+
+    <section class="vote-section" aria-labelledby="vote-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">亲友投票</p>
+          <h2 id="vote-heading">选出你最喜欢的 3 个名字</h2>
+        </div>
+        <span class="vote-limit">匿名 · 每台设备一次</span>
+      </div>
+      <p class="vote-intro">先在下方字库查看评分，再点击上方“加入”按钮。三个名字不分先后，每个名字计 1 票。</p>
+      <div id="vote-selection" class="vote-selection" aria-live="polite"></div>
+      <div class="vote-actions">
+        <button id="vote-submit" class="vote-submit" type="button" disabled>提交 3 个选择</button>
+        <button id="vote-clear" class="vote-clear" type="button" disabled>清空选择</button>
+      </div>
+      <p id="vote-status" class="vote-status" aria-live="polite">请选择 3 个不同的名字后提交。</p>
     </section>
 
     <section class="choices-section" aria-labelledby="choices-heading">
@@ -75,6 +96,7 @@
       <span>评分按金、水优先的取名方向设计，仅供起名时比较字义、读音与兄弟呼应，不作命运判断。</span>
     </aside>
   </main>
-  <script src="app.js?v=20260802-2"></script>
+  <script src="vote-config.js?v=20260802-2"></script>
+  <script src="app.js?v=20260802-3"></script>
 </body>
 </html>

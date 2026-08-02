@@ -39,12 +39,33 @@ h2 { margin: 3px 0 0; font-size: 1.15rem; }
 .speech-button { padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--jade); background: var(--surface); cursor: pointer; font-size: .8rem; }
 .speech-button:hover, .speech-button:focus-visible { border-color: var(--jade); background: var(--jade-soft); }
 .speech-status { min-height: 1.3em; margin: 7px 0 0; color: var(--muted); font-size: .76rem; }
+.vote-add-row { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; margin-top: 13px; }
+.vote-add-button, .vote-submit, .vote-clear { border: 1px solid var(--jade); border-radius: 999px; cursor: pointer; }
+.vote-add-button { padding: 8px 13px; color: #fff; background: var(--jade); font-size: .82rem; }
+.vote-add-button:hover, .vote-add-button:focus-visible { background: #125448; }
+.vote-add-button:disabled, .vote-submit:disabled, .vote-clear:disabled { cursor: not-allowed; opacity: .5; }
+.vote-progress, .vote-limit { color: var(--muted); font-size: .78rem; }
 .score-orb { display: grid; grid-template-columns: auto auto; align-items: baseline; flex: 0 0 auto; width: 100px; height: 100px; padding-top: 2px; place-content: center; border: 7px solid var(--jade); border-radius: 50%; color: var(--jade); }
 .score-orb strong { font-size: 2.35rem; line-height: 1; letter-spacing: -.06em; }
 .score-orb span { font-size: .75rem; }
 
 section { margin: 0 0 30px; }
 .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
+.vote-section { padding: 20px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255, 253, 248, .7); }
+.vote-intro { margin: 0 0 14px; color: var(--muted); font-size: .88rem; line-height: 1.65; }
+.vote-selection { display: flex; flex-wrap: wrap; gap: 8px; min-height: 42px; }
+.vote-empty { color: var(--muted); font-size: .86rem; line-height: 42px; }
+.vote-chip { display: inline-flex; align-items: center; gap: 6px; padding: 7px 9px 7px 12px; border: 1px solid #8bc8ad; border-radius: 999px; color: var(--jade); background: #edf8f1; font-family: "STKaiti", "KaiTi", serif; font-size: 1.05rem; }
+.vote-chip button { width: 20px; height: 20px; padding: 0; border: 0; border-radius: 50%; color: var(--jade); background: transparent; cursor: pointer; line-height: 1; }
+.vote-chip button:hover, .vote-chip button:focus-visible { background: rgba(23, 105, 94, .12); }
+.vote-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 14px; }
+.vote-submit { padding: 9px 14px; color: #fff; background: var(--jade); font-size: .84rem; }
+.vote-submit:hover, .vote-submit:focus-visible { background: #125448; }
+.vote-clear { padding: 9px 14px; border-color: var(--line); color: var(--muted); background: var(--surface); font-size: .84rem; }
+.vote-clear:hover, .vote-clear:focus-visible { border-color: var(--jade); color: var(--jade); }
+.vote-status { min-height: 1.3em; margin: 10px 0 0; color: var(--muted); font-size: .8rem; line-height: 1.5; }
+.vote-status.is-error { color: var(--danger); }
+.vote-status.is-success { color: var(--jade); }
 .legend { display: flex; flex-wrap: wrap; gap: 12px; margin: -2px 0 14px; color: var(--muted); font-size: .78rem; }
 .legend span { display: inline-flex; align-items: center; gap: 5px; }
 .legend-dot { width: 8px; height: 8px; display: inline-block; border-radius: 50%; background: #c9ccc5; }
@@ -66,6 +87,7 @@ section { margin: 0 0 30px; }
 .candidate.relationship-strong { border-color: #8bc8ad; background: #edf8f1; }
 .candidate.relationship-related { border-color: #e0bd76; background: #fff6df; }
 .candidate.relationship-strong[aria-pressed="true"], .candidate.relationship-related[aria-pressed="true"] { border-width: 2px; }
+.candidate.vote-selected { box-shadow: 0 0 0 3px rgba(23, 105, 94, .14); }
 
 .result-section { padding: 23px; border: 1px solid var(--line); border-radius: 22px; background: var(--surface); }
 .result-title { margin-bottom: 18px; }
@@ -85,7 +107,7 @@ section { margin: 0 0 30px; }
 
 @media (max-width: 380px) {
   .page-shell { padding: 28px 15px 42px; }
-  .name-panel, .result-section { padding: 18px; border-radius: 18px; }
+  .name-panel, .vote-section, .result-section { padding: 18px; border-radius: 18px; }
   .score-orb { width: 84px; height: 84px; border-width: 6px; }
   .score-orb strong { font-size: 2rem; }
   .score-row { grid-template-columns: 76px 1fr 38px; gap: 8px; }

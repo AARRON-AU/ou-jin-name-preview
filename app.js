@@ -93,7 +93,15 @@ const soundText = document.querySelector('#sound-text');
 const brotherText = document.querySelector('#brother-text');
 const cantoneseSpeak = document.querySelector('#cantonese-speak');
 const speechStatus = document.querySelector('#speech-status');
+const voteAddCurrent = document.querySelector('#vote-add-current');
+const voteProgress = document.querySelector('#vote-progress');
+const voteSelection = document.querySelector('#vote-selection');
+const voteSubmit = document.querySelector('#vote-submit');
+const voteClear = document.querySelector('#vote-clear');
+const voteStatus = document.querySelector('#vote-status');
+const voteConfig = window.NAME_VOTE_CONFIG || { supabaseUrl: '', supabaseAnonKey: '', table: 'name_votes', storageKey: 'ou-jin-name-vote-v1' };
 let selectedCharacter = '旋';
+let voteChoices = [];
 
 const relationshipMap = new Map(siblingCandidates.filter((item) => item.brother > 0).map((item) => [item.char, item]));
 
@@ -141,6 +149,122 @@ function setSelection(character) {
   meaningText.textContent = item.meaningText;
   soundText.textContent = item.soundText;
   brotherText.textContent = item.brotherText;
+  renderVoteSelection();
+}
+
+function hasSubmittedVote() {
+  try {
+    return window.localStorage.getItem(voteConfig.storageKey) === 'submitted';
+  } catch {
+    return false;
+  }
+}
+
+function setVoteStatus(message, state = '') {
+  voteStatus.textContent = message;
+  voteStatus.classList.remove('is-error', 'is-success');
+  if (state) voteStatus.classList.add(state);
+}
+
+function renderVoteSelection() {
+  const submitted = hasSubmittedVote();
+  const currentIsSelected = voteChoices.includes(selectedCharacter);
+  voteProgress.textContent = `已选 ${voteChoices.length}/3`;
+  document.querySelectorAll('.candidate').forEach((button) => {
+    button.classList.toggle('vote-selected', voteChoices.includes(button.dataset.char));
+  });
+  voteSelection.innerHTML = voteChoices.length
+    ? voteChoices.map((character) => `<span class="vote-chip">区晋${character}<button type="button" data-remove-vote="${character}" aria-label="移除区晋${character}"${submitted ? ' disabled' : ''}>×</button></span>`).join('')
+    : '<span class="vote-empty">还没有选择。请先点击字库中的名字查看评分。</span>';
+  voteAddCurrent.textContent = currentIsSelected ? `移除区晋${selectedCharacter}` : `加入区晋${selectedCharacter}`;
+  voteAddCurrent.disabled = submitted || (!currentIsSelected && voteChoices.length >= 3);
+  voteSubmit.disabled = submitted || voteChoices.length !== 3;
+  voteClear.disabled = submitted || voteChoices.length === 0;
+  if (submitted) {
+    setVoteStatus('这台设备已经提交过投票，感谢参与。', 'is-success');
+  }
+}
+
+function toggleVoteChoice() {
+  if (hasSubmittedVote()) return;
+  const index = voteChoices.indexOf(selectedCharacter);
+  if (index >= 0) {
+    voteChoices.splice(index, 1);
+    setVoteStatus('已移除当前名字，请继续选择。');
+  } else if (voteChoices.length >= 3) {
+    setVoteStatus('最多只能选择 3 个名字。', 'is-error');
+    return;
+  } else {
+    voteChoices.push(selectedCharacter);
+    setVoteStatus(`已加入区晋${selectedCharacter}，还可以选择 ${3 - voteChoices.length} 个。`);
+  }
+  renderVoteSelection();
+}
+
+function removeVoteChoice(character) {
+  if (hasSubmittedVote()) return;
+  voteChoices = voteChoices.filter((item) => item !== character);
+  setVoteStatus(`已移除区晋${character}。`);
+  renderVoteSelection();
+}
+
+function clearVoteChoices() {
+  if (hasSubmittedVote()) return;
+  voteChoices = [];
+  setVoteStatus('已清空选择，请重新挑选 3 个名字。');
+  renderVoteSelection();
+}
+
+function createVoteId() {
+  if (window.crypto?.randomUUID) return window.crypto.randomUUID();
+  return `vote-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
+async function submitVote() {
+  if (hasSubmittedVote()) return;
+  if (voteChoices.length !== 3) {
+    setVoteStatus('请先选择 3 个不同的名字。', 'is-error');
+    return;
+  }
+  if (!voteConfig.supabaseUrl || !voteConfig.supabaseAnonKey) {
+    setVoteStatus('投票数据服务尚未配置，请联系发起人完成设置。', 'is-error');
+    return;
+  }
+
+  voteSubmit.disabled = true;
+  setVoteStatus('正在提交匿名投票……');
+  const payload = {
+    kind: 'ou-jin-name-vote',
+    voteId: createVoteId(),
+    selections: [...voteChoices],
+    submittedAt: new Date().toISOString()
+  };
+  try {
+    const endpoint = `${voteConfig.supabaseUrl.replace(/\/$/, '')}/rest/v1/${voteConfig.table || 'name_votes'}`;
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      cache: 'no-store',
+      headers: {
+        apikey: voteConfig.supabaseAnonKey,
+        Authorization: `Bearer ${voteConfig.supabaseAnonKey}`,
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal'
+      },
+      body: JSON.stringify({
+        vote_id: payload.voteId,
+        selection_1: payload.selections[0],
+        selection_2: payload.selections[1],
+        selection_3: payload.selections[2]
+      })
+    });
+    if (!response.ok) throw new Error(`vote request failed: ${response.status}`);
+    window.localStorage.setItem(voteConfig.storageKey, 'submitted');
+    setVoteStatus('投票已提交，感谢你的选择！', 'is-success');
+    renderVoteSelection();
+  } catch {
+    voteSubmit.disabled = false;
+    setVoteStatus('提交失败，请检查网络后重试。', 'is-error');
+  }
 }
 
 function speakCantonese() {
@@ -176,5 +300,12 @@ groupContainer.addEventListener('click', (event) => {
 });
 
 cantoneseSpeak.addEventListener('click', speakCantonese);
+voteAddCurrent.addEventListener('click', toggleVoteChoice);
+voteSubmit.addEventListener('click', submitVote);
+voteClear.addEventListener('click', clearVoteChoices);
+voteSelection.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-remove-vote]');
+  if (button) removeVoteChoice(button.dataset.removeVote);
+});
 
 setSelection('旋');
