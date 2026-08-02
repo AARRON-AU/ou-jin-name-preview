@@ -13,10 +13,12 @@ const { candidates } = sandbox;
 const errors = [];
 const byChar = new Map(candidates.map((item) => [item.char, item]));
 
-if (candidates.length !== 40) errors.push(`Expected 40 candidates, found ${candidates.length}.`);
-if (byChar.size !== 40) errors.push('Candidate characters must be unique.');
-const siblingCount = (source.match(/siblingItem\(/g) || []).length - 1;
-if (siblingCount < 20) errors.push(`Expected at least 20 sibling candidates, found ${siblingCount}.`);
+if (candidates.length !== 100) errors.push(`Expected 100 candidates, found ${candidates.length}.`);
+if (byChar.size !== 100) errors.push('Candidate characters must be unique.');
+if (candidates.filter((item) => item.group === '金').length !== 50) errors.push('金字库 must contain 50 candidates.');
+if (candidates.filter((item) => item.group === '水').length !== 50) errors.push('水字库 must contain 50 candidates.');
+const siblingCount = source.split('siblingItem(').length - 2;
+if (siblingCount !== 30) errors.push(`Expected 30 sibling candidates, found ${siblingCount}.`);
 if (page.includes('character-input') || page.includes('entry-section')) errors.push('Manual third-character input must be removed.');
 if (page.includes('mandarin-speak') || source.includes('playMandarinAudio') || source.includes('translate.google.com/translate_tts')) errors.push('Mandarin speech button and online audio must be removed.');
 if (!page.includes('cantonese-speak') || !source.includes('function speakCantonese')) errors.push('Cantonese speech control is missing.');
@@ -52,4 +54,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Verified ${candidates.length} candidates; 凯旋 / 凯风 associations and scoring caps are valid.`);
+console.log(`Verified 50 金 candidates, 50 水 candidates, 30 sibling candidates; scoring caps are valid.`);
