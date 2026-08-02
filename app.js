@@ -81,55 +81,21 @@ const elements = {
   '兄弟呼应': '与“恺”组成词语或谐音'
 };
 
-const input = document.querySelector('#character-input');
 const nameDisplay = document.querySelector('#name-display');
 const reading = document.querySelector('#cantonese-reading');
 const totalScore = document.querySelector('#total-score');
 const scoreOrb = document.querySelector('.score-orb');
-const status = document.querySelector('#input-status');
 const groupContainer = document.querySelector('#candidate-groups');
 const breakdown = document.querySelector('#score-breakdown');
 const badge = document.querySelector('#element-badge');
 const meaningText = document.querySelector('#meaning-text');
 const soundText = document.querySelector('#sound-text');
 const brotherText = document.querySelector('#brother-text');
-const mandarinSpeak = document.querySelector('#mandarin-speak');
 const cantoneseSpeak = document.querySelector('#cantonese-speak');
 const speechStatus = document.querySelector('#speech-status');
-let mandarinAudio = null;
+let selectedCharacter = '旋';
 
 const relationshipMap = new Map(siblingCandidates.filter((item) => item.brother > 0).map((item) => [item.char, item]));
-
-const manualElementProfiles = new Map([
-  ['海', { group: '水', label: '海水意象' }], ['江', { group: '水', label: '江河意象' }], ['河', { group: '水', label: '江河意象' }],
-  ['涛', { group: '水', label: '水势意象' }], ['淼', { group: '水', label: '水势意象' }], ['浩', { group: '水', label: '浩水意象' }],
-  ['鑫', { group: '金', label: '三金字形' }], ['金', { group: '金', label: '金字形' }], ['银', { group: '金', label: '金属意象' }],
-  ['锋', { group: '金', label: '金属字形' }], ['钰', { group: '金', label: '金属字形' }]
-]);
-
-function makeEstimatedItem(character) {
-  const relation = relationshipMap.get(character);
-  const profile = manualElementProfiles.get(character);
-  const elementName = profile?.group || '中性';
-  const bazi = profile?.group === '水' ? 30 : profile?.group === '金' ? 28 : 18;
-  const meaning = profile ? 22 : 20;
-  const sound = 18;
-  return {
-    char: character,
-    group: profile?.group || '未收录',
-    relationship: relation?.relationship,
-    jyutping: '待核对',
-    bazi,
-    meaning,
-    sound,
-    brother: relation?.brother || 0,
-    meaningText: profile ? `该字未在精选字库中，但按“${profile.label}”归入${elementName}方向；寓意项采用保守基准 ${meaning}/25。` : `该字未在精选字库中，也未命中金水字形规则；寓意项采用保守中性基准 ${meaning}/25。`,
-    soundText: `粤语读音尚未收录，因此音律项按基础 ${sound}/30 计分；请以本地家庭实际读音复核。`,
-    brotherText: relation ? relation.brotherText : '暂未收录与“恺”组成词语或正向谐音的资料。',
-    estimated: true,
-    evidenceText: profile ? `八字项依据：${profile.label} → ${elementName}方向，${bazi}/30。` : `八字项依据：未命中金水字形规则，采用中性保守值 ${bazi}/30。`
-  };
-}
 
 function buildCandidates() {
   groupContainer.innerHTML = groups.map((group, index) => {
@@ -150,26 +116,14 @@ function scoreRow(label, score, max) {
 }
 
 function setSelection(character) {
-  const item = candidateMap.get(character) || (character ? makeEstimatedItem(character) : null);
-  nameDisplay.textContent = `区晋${character || '□'}`;
-  input.value = character;
+  const item = candidateMap.get(character);
+  if (!item) return;
+
+  selectedCharacter = character;
+  nameDisplay.textContent = `区晋${character}`;
   document.querySelectorAll('.candidate').forEach((button) => {
     button.setAttribute('aria-pressed', String(button.dataset.char === character));
   });
-
-  if (!item) {
-    totalScore.textContent = '—';
-    scoreOrb.setAttribute('aria-label', '请输入第三个字');
-    reading.textContent = '粤语：待核对';
-    badge.textContent = '待输入';
-    breakdown.innerHTML = '';
-    meaningText.textContent = '请输入一个汉字后查看评分。';
-    soundText.textContent = '请输入一个汉字后查看评分。';
-    brotherText.textContent = '请输入一个汉字后查看评分。';
-    status.textContent = '请输入一个第三个字。';
-    status.classList.remove('is-error');
-    return;
-  }
 
   const meaningScore = Math.min(item.meaning, 25);
   const brotherScore = Math.min(15, Math.round(item.brother * 1.5));
@@ -177,97 +131,41 @@ function setSelection(character) {
   totalScore.textContent = total;
   scoreOrb.setAttribute('aria-label', `总分 ${total} 分`);
   reading.textContent = `粤语：Au1 Zeon3 ${item.jyutping}`;
-  badge.textContent = item.estimated ? '估算' : item.group;
+  badge.textContent = item.group;
   breakdown.innerHTML = [
     scoreRow('八字结合度', item.bazi, 30),
     scoreRow('寓意与气质', meaningScore, 25),
     scoreRow('粤语听感', item.sound, 30),
     scoreRow('与“恺”呼应', brotherScore, 15)
   ].join('');
-  meaningText.textContent = item.estimated ? `${item.meaningText} ${item.evidenceText}` : item.meaningText;
+  meaningText.textContent = item.meaningText;
   soundText.textContent = item.soundText;
   brotherText.textContent = item.brotherText;
-  status.textContent = item.estimated ? '未收录：已按内置金水/中性规则给出可解释估算，粤语读音仍建议人工复核。' : '已收录：可查看完整评分依据。';
-  status.classList.toggle('is-error', Boolean(item.estimated));
 }
 
-function playMandarinAudio(character) {
-  const text = `欧晋${character}`;
-  if (mandarinAudio) {
-    mandarinAudio.pause();
-    mandarinAudio.currentTime = 0;
-  }
-
-  const audioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=zh-CN&total=1&idx=0&textlen=${text.length}&q=${encodeURIComponent(text)}`;
-  mandarinAudio = new Audio(audioUrl);
-  mandarinAudio.preload = 'auto';
-  speechStatus.textContent = '普通话：正在加载标准普通话音频……';
-  status.classList.remove('is-error');
-  mandarinAudio.addEventListener('play', () => {
-    speechStatus.textContent = '普通话：标准普通话音频（在线）';
-  }, { once: true });
-  mandarinAudio.addEventListener('error', () => {
-    const message = '普通话音频加载失败，请检查网络后重试。';
-    speechStatus.textContent = message;
-    status.textContent = message;
-    status.classList.add('is-error');
-  }, { once: true });
-  const playRequest = mandarinAudio.play();
-  if (playRequest && typeof playRequest.catch === 'function') {
-    playRequest.catch(() => {
-      const message = '普通话音频无法播放，请确认浏览器允许声音并检查网络。';
-      speechStatus.textContent = message;
-      status.textContent = message;
-      status.classList.add('is-error');
-    });
-  }
-}
-
-function speakName(language) {
-  const character = Array.from(input.value.trim())[0];
-  if (!character) return;
-
-  if (language === 'zh-CN') {
-    window.speechSynthesis?.cancel();
-    playMandarinAudio(character);
-    return;
-  }
-
+function speakCantonese() {
   if (!('speechSynthesis' in window)) {
-    status.textContent = '当前浏览器不支持语音朗读。';
     speechStatus.textContent = '当前浏览器不支持语音朗读。';
-    status.classList.add('is-error');
     return;
   }
   window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(`欧晋${character}`);
-  utterance.lang = language;
+  const utterance = new SpeechSynthesisUtterance(`欧晋${selectedCharacter}`);
+  utterance.lang = 'zh-HK';
   const voices = window.speechSynthesis.getVoices();
-  const aliases = language === 'zh-CN'
-    ? ['zh-cn', 'cmn-hans-cn', 'cmn-cn', 'zh-hans-cn', 'zh-hans']
-    : ['zh-hk', 'yue-hk', 'yue'];
+  const aliases = ['zh-hk', 'yue-hk', 'yue'];
   const preferred = voices.find((voice) => {
     const voiceLanguage = voice.lang.toLowerCase();
     const voiceName = voice.name.toLowerCase();
     const exactLanguage = aliases.some((alias) => voiceLanguage === alias || voiceLanguage.startsWith(`${alias}-`));
-    const explicitlyWrong = language === 'zh-CN'
-      ? /粤语|cantonese|yue|hong kong|香港|廣東/.test(voiceName)
-      : /普通话|mandarin|mainland|simplified|中国大陆|普通話/.test(voiceName);
-    const explicitlyMandarin = /普通话|普通話|mandarin|simplified|mainland|中国大陆|china|ting[- ]?ting|huihui|yaoyao|kangkang|meijia|hanhan/.test(voiceName);
-    return exactLanguage && !explicitlyWrong && (language !== 'zh-CN' || explicitlyMandarin);
+    const explicitlyMandarin = /普通话|普通話|mandarin|mainland|simplified|中国大陆/.test(voiceName);
+    return exactLanguage && !explicitlyMandarin;
   });
   if (!preferred) {
-    const message = language === 'zh-CN'
-      ? '未检测到普通话语音，请在设备系统中安装中文（普通话）语音包。'
-      : '未检测到粤语语音，请在设备系统中安装粤语语音包。';
-    status.textContent = message;
-    speechStatus.textContent = message;
-    status.classList.add('is-error');
+    speechStatus.textContent = '未检测到粤语语音，请在设备系统中安装粤语语音包。';
     return;
   }
   utterance.voice = preferred;
-  speechStatus.textContent = `${language === 'zh-CN' ? '普通话' : '粤语'}：${preferred.name}（${preferred.lang}）`;
-  status.classList.remove('is-error');
+  speechStatus.textContent = `粤语：${preferred.name}（${preferred.lang}）`;
   window.speechSynthesis.speak(utterance);
 }
 
@@ -277,13 +175,6 @@ groupContainer.addEventListener('click', (event) => {
   if (button) setSelection(button.dataset.char);
 });
 
-input.addEventListener('input', () => {
-  const value = Array.from(input.value.trim())[0] || '';
-  if (input.value !== value) input.value = value;
-  setSelection(value);
-});
-
-mandarinSpeak.addEventListener('click', () => speakName('zh-CN'));
-cantoneseSpeak.addEventListener('click', () => speakName('zh-HK'));
+cantoneseSpeak.addEventListener('click', speakCantonese);
 
 setSelection('旋');

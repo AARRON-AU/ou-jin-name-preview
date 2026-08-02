@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 
 const source = fs.readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+const page = fs.readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 const dataSource = source.slice(0, source.indexOf('const candidateMap'))
   .replace('const candidates =', 'globalThis.candidates =');
 const sandbox = {};
@@ -16,15 +17,13 @@ if (candidates.length !== 40) errors.push(`Expected 40 candidates, found ${candi
 if (byChar.size !== 40) errors.push('Candidate characters must be unique.');
 const siblingCount = (source.match(/siblingItem\(/g) || []).length - 1;
 if (siblingCount < 20) errors.push(`Expected at least 20 sibling candidates, found ${siblingCount}.`);
-if (!source.includes('SpeechSynthesisUtterance(`欧晋${character}`)')) errors.push('Speech should use 欧晋X for both reading modes.');
-if (source.includes("|| voices.find((voice) => voice.lang.toLowerCase().startsWith('zh'))")) errors.push('Speech must not fall back to an arbitrary Chinese voice.');
-if (!source.includes("'cmn-hans-cn'") || !source.includes("'yue-hk'")) errors.push('Speech language aliases are incomplete.');
+if (page.includes('character-input') || page.includes('entry-section')) errors.push('Manual third-character input must be removed.');
+if (page.includes('mandarin-speak') || source.includes('playMandarinAudio') || source.includes('translate.google.com/translate_tts')) errors.push('Mandarin speech button and online audio must be removed.');
+if (!page.includes('cantonese-speak') || !source.includes('function speakCantonese')) errors.push('Cantonese speech control is missing.');
+if (!source.includes('SpeechSynthesisUtterance(`欧晋${selectedCharacter}`)')) errors.push('Cantonese speech should use 欧晋X.');
+if (!source.includes("'yue-hk'")) errors.push('Cantonese voice aliases are incomplete.');
 if (!source.includes('window.speechSynthesis.cancel();')) errors.push('Speech must cancel an older utterance before selecting a new voice.');
 if (!source.includes('speechStatus.textContent')) errors.push('Speech voice diagnostics are missing.');
-if (!source.includes('explicitlyMandarin')) errors.push('Mandarin voice name verification is missing.');
-if (!source.includes('function playMandarinAudio')) errors.push('Mandarin audio fallback is missing.');
-if (!source.includes('translate.google.com/translate_tts')) errors.push('Standard Mandarin audio endpoint is missing.');
-if (!source.includes('tl=zh-CN')) errors.push('Mandarin audio endpoint must request zh-CN.');
 
 for (const item of candidates) {
   const total = item.bazi + item.meaning + item.sound + item.brother;
