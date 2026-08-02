@@ -22,6 +22,9 @@ if (!source.includes("'cmn-hans-cn'") || !source.includes("'yue-hk'")) errors.pu
 if (!source.includes('window.speechSynthesis.cancel();')) errors.push('Speech must cancel an older utterance before selecting a new voice.');
 if (!source.includes('speechStatus.textContent')) errors.push('Speech voice diagnostics are missing.');
 if (!source.includes('explicitlyMandarin')) errors.push('Mandarin voice name verification is missing.');
+if (!source.includes('function playMandarinAudio')) errors.push('Mandarin audio fallback is missing.');
+if (!source.includes('translate.google.com/translate_tts')) errors.push('Standard Mandarin audio endpoint is missing.');
+if (!source.includes('tl=zh-CN')) errors.push('Mandarin audio endpoint must request zh-CN.');
 
 for (const item of candidates) {
   const total = item.bazi + item.meaning + item.sound + item.brother;

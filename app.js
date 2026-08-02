@@ -96,6 +96,7 @@ const brotherText = document.querySelector('#brother-text');
 const mandarinSpeak = document.querySelector('#mandarin-speak');
 const cantoneseSpeak = document.querySelector('#cantonese-speak');
 const speechStatus = document.querySelector('#speech-status');
+let mandarinAudio = null;
 
 const relationshipMap = new Map(siblingCandidates.filter((item) => item.brother > 0).map((item) => [item.char, item]));
 
@@ -190,15 +191,54 @@ function setSelection(character) {
   status.classList.toggle('is-error', Boolean(item.estimated));
 }
 
+function playMandarinAudio(character) {
+  const text = `欧晋${character}`;
+  if (mandarinAudio) {
+    mandarinAudio.pause();
+    mandarinAudio.currentTime = 0;
+  }
+
+  const audioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=zh-CN&total=1&idx=0&textlen=${text.length}&q=${encodeURIComponent(text)}`;
+  mandarinAudio = new Audio(audioUrl);
+  mandarinAudio.preload = 'auto';
+  speechStatus.textContent = '普通话：正在加载标准普通话音频……';
+  status.classList.remove('is-error');
+  mandarinAudio.addEventListener('play', () => {
+    speechStatus.textContent = '普通话：标准普通话音频（在线）';
+  }, { once: true });
+  mandarinAudio.addEventListener('error', () => {
+    const message = '普通话音频加载失败，请检查网络后重试。';
+    speechStatus.textContent = message;
+    status.textContent = message;
+    status.classList.add('is-error');
+  }, { once: true });
+  const playRequest = mandarinAudio.play();
+  if (playRequest && typeof playRequest.catch === 'function') {
+    playRequest.catch(() => {
+      const message = '普通话音频无法播放，请确认浏览器允许声音并检查网络。';
+      speechStatus.textContent = message;
+      status.textContent = message;
+      status.classList.add('is-error');
+    });
+  }
+}
+
 function speakName(language) {
+  const character = Array.from(input.value.trim())[0];
+  if (!character) return;
+
+  if (language === 'zh-CN') {
+    window.speechSynthesis?.cancel();
+    playMandarinAudio(character);
+    return;
+  }
+
   if (!('speechSynthesis' in window)) {
     status.textContent = '当前浏览器不支持语音朗读。';
     speechStatus.textContent = '当前浏览器不支持语音朗读。';
     status.classList.add('is-error');
     return;
   }
-  const character = Array.from(input.value.trim())[0];
-  if (!character) return;
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(`欧晋${character}`);
   utterance.lang = language;
