@@ -213,7 +213,8 @@ function speakName(language) {
     const explicitlyWrong = language === 'zh-CN'
       ? /粤语|cantonese|yue|hong kong|香港|廣東/.test(voiceName)
       : /普通话|mandarin|mainland|simplified|中国大陆|普通話/.test(voiceName);
-    return exactLanguage && !explicitlyWrong;
+    const explicitlyMandarin = /普通话|普通話|mandarin|simplified|mainland|中国大陆|china|ting[- ]?ting|huihui|yaoyao|kangkang|meijia|hanhan/.test(voiceName);
+    return exactLanguage && !explicitlyWrong && (language !== 'zh-CN' || explicitlyMandarin);
   });
   if (!preferred) {
     const message = language === 'zh-CN'
