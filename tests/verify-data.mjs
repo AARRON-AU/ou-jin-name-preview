@@ -13,10 +13,10 @@ const { candidates } = sandbox;
 const errors = [];
 const byChar = new Map(candidates.map((item) => [item.char, item]));
 
-if (candidates.length !== 100) errors.push(`Expected 100 candidates, found ${candidates.length}.`);
-if (byChar.size !== 100) errors.push('Candidate characters must be unique.');
-if (candidates.filter((item) => item.group === '金').length !== 50) errors.push('金字库 must contain 50 candidates.');
-if (candidates.filter((item) => item.group === '水').length !== 50) errors.push('水字库 must contain 50 candidates.');
+if (candidates.length !== 160) errors.push(`Expected 160 candidates, found ${candidates.length}.`);
+if (byChar.size !== 160) errors.push('Candidate characters must be unique.');
+if (candidates.filter((item) => item.group === '金').length !== 80) errors.push('金字库 must contain 80 candidates.');
+if (candidates.filter((item) => item.group === '水').length !== 80) errors.push('水字库 must contain 80 candidates.');
 const goldChars = candidates.filter((item) => item.group === '金').map((item) => item.char);
 const waterChars = candidates.filter((item) => item.group === '水').map((item) => item.char);
 const goldPrefix = ['旋', '铎', '钧', '铭', '铮', '锐', '锡', '铨', '钊', '钰', '锴', '锟', '镕', '锵', '钟', '锋', '鑫', '锦', '钦', '铠', '镇', '铸', '镜', '鉴', '铿'];
@@ -63,4 +63,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Verified 50 金 candidates, 50 水 candidates, 30 sibling candidates; scoring caps are valid.`);
+console.log(`Verified 80 金 candidates, 80 水 candidates, 30 sibling candidates; scoring caps are valid.`);
