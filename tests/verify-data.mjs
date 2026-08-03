@@ -17,6 +17,15 @@ if (candidates.length !== 100) errors.push(`Expected 100 candidates, found ${can
 if (byChar.size !== 100) errors.push('Candidate characters must be unique.');
 if (candidates.filter((item) => item.group === '金').length !== 50) errors.push('金字库 must contain 50 candidates.');
 if (candidates.filter((item) => item.group === '水').length !== 50) errors.push('水字库 must contain 50 candidates.');
+const goldChars = candidates.filter((item) => item.group === '金').map((item) => item.char);
+const waterChars = candidates.filter((item) => item.group === '水').map((item) => item.char);
+const goldPrefix = ['旋', '铎', '钧', '铭', '铮', '锐', '锡', '铨', '钊', '钰', '锴', '锟', '镕', '锵', '钟', '锋', '鑫', '锦', '钦', '铠', '镇', '铸', '镜', '鉴', '铿'];
+const waterPrefix = ['风', '泓', '泽', '湛', '涵', '淳', '渊', '澜', '瀚', '源', '浩', '沛', '潇', '澈', '清', '润', '洋', '航', '沅', '洵', '淮', '沐', '澍', '溯', '冰'];
+if (goldChars.slice(0, 25).join('') !== goldPrefix.join('')) errors.push('金字库前25个字必须保持不变。');
+if (waterChars.slice(0, 25).join('') !== waterPrefix.join('')) errors.push('水字库前25个字必须保持不变。');
+if (goldChars.slice(25).some((char) => /[金钅釒]/u.test(char))) errors.push('金字库后25个字不应硬性使用金字旁。');
+if (waterChars.slice(25).some((char) => /[水氵]/u.test(char))) errors.push('水字库后25个字不应硬性使用三点水。');
+if (candidates.some((item) => item.char === '霖')) errors.push('霖字必须排除。');
 const siblingCount = source.split('siblingItem(').length - 2;
 if (siblingCount !== 30) errors.push(`Expected 30 sibling candidates, found ${siblingCount}.`);
 if (page.includes('character-input') || page.includes('entry-section')) errors.push('Manual third-character input must be removed.');
