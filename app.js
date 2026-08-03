@@ -1435,4 +1435,4 @@ voteSelection.addEventListener('click', (event) => {
   if (button) removeVoteChoice(button.dataset.removeVote);
 });
 
-setSelection('旋');
+setSelection(candidates[0]?.char || siblingCandidates[0]?.char);
