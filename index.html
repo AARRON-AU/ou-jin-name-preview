@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#123b37">
   <title>名字评分</title>
-  <link rel="stylesheet" href="styles.css?v=20260803-5">
+  <link rel="stylesheet" href="styles.css?v=20260803-6">
 </head>
 <body>
   <main class="page-shell">
@@ -17,20 +17,21 @@
 
     <div class="name-vote-panel">
     <section class="name-panel" aria-labelledby="name-heading">
-      <div>
-        <p id="name-heading" class="section-label">正在预览</p>
-        <output id="name-display" class="full-name" aria-live="polite">区晋旋</output>
-        <p id="cantonese-reading" class="reading">粤语：Au1 Zeon3 Syun4</p>
-        <p id="speech-status" class="speech-status" aria-live="polite">粤语按钮使用设备粤语语音。</p>
-        <div class="preview-actions">
-          <div class="speech-actions" aria-label="朗读名字">
-            <button id="cantonese-speak" class="speech-button" type="button">粤语读音</button>
-          </div>
-          <div class="vote-add-row">
-            <button id="vote-add-current" class="vote-add-button" type="button">加入区晋旋</button>
-            <span id="vote-progress" class="vote-progress">已选 0/5</span>
+      <div class="name-main">
+        <div class="name-main-row">
+          <output id="name-display" class="full-name" aria-live="polite">区晋旋</output>
+          <div class="preview-actions">
+            <div class="speech-actions" aria-label="朗读名字">
+              <button id="cantonese-speak" class="speech-button" type="button">粤语读音</button>
+            </div>
+            <div class="vote-add-row">
+              <button id="vote-add-current" class="vote-add-button" type="button">加入区晋旋</button>
+              <span id="vote-progress" class="vote-progress">已选 0/5</span>
+            </div>
           </div>
         </div>
+        <p id="cantonese-reading" class="reading">粤语：Au1 Zeon3 Syun4</p>
+        <p id="speech-status" class="speech-status" aria-live="polite">粤语按钮使用设备粤语语音。</p>
       </div>
       <div class="score-orb" aria-label="总分 97 分">
         <strong id="total-score">97</strong><span>/100</span>
@@ -73,7 +74,6 @@
     <section id="result-section" class="result-section" aria-labelledby="result-heading">
       <div class="section-heading result-title">
         <div>
-          <p class="eyebrow">评分明细</p>
           <h2 id="result-heading">为什么是这个分数</h2>
         </div>
         <span id="element-badge" class="element-badge">金</span>
