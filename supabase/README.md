@@ -1,6 +1,6 @@
 # 投票数据服务设置
 
-投票页面使用 Supabase 保存匿名的 3 个选择。亲友页面只允许写入投票，不提供读取统计的权限；你登录 Supabase 后，在 Table Editor 查看 `name_votes`，或在 SQL Editor 查询 `name_vote_counts`。
+投票页面使用 Supabase 保存匿名的 5 个选择，并兼容此前已经提交的 3 选投票。页面只公开汇总统计，不公开原始选票；结果图表可直接打开 `results.html` 查看。
 
 1. 新建一个 Supabase 项目。
 2. 打开项目的 **SQL Editor**，粘贴并运行 `schema.sql` 全部内容。
@@ -16,4 +16,4 @@ window.NAME_VOTE_CONFIG = {
 };
 ```
 
-提交后，每张票会写入 `name_votes` 的三列选择。`name_vote_counts` 视图会把三列合并并按票数排序。浏览器只保存一个随机投票编号，用于尽量阻止同一设备重复提交，不包含姓名、电话或地址。
+提交后，新投票会写入 `name_votes` 的五列选择。`name_vote_counts` 视图会把非空选择合并并按票数排序；`name_vote_summary` 提供投票张数汇总。浏览器只保存一个随机投票编号，用于尽量阻止同一设备重复提交，不包含姓名、电话或地址。

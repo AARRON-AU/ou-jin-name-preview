@@ -26,6 +26,9 @@ if (waterChars.slice(0, 25).join('') !== waterPrefix.join('')) errors.push('水�
 if (goldChars.slice(25).some((char) => /[金钅釒]/u.test(char))) errors.push('金字库后25个字不应硬性使用金字旁。');
 if (waterChars.slice(25).some((char) => /[水氵]/u.test(char))) errors.push('水字库后25个字不应硬性使用三点水。');
 if (candidates.some((item) => item.char === '霖')) errors.push('霖字必须排除。');
+for (const feminine of ['诗', '静', '玥', '珊', '玲', '瑶', '琬', '雪', '露', '霞', '雯', '霏', '霓', '贝', '盈', '曼', '妍']) {
+  if (byChar.has(feminine)) errors.push(`明显偏女性化字 ${feminine} 应已替换。`);
+}
 const siblingCount = source.split('siblingItem(').length - 2;
 if (siblingCount !== 30) errors.push(`Expected 30 sibling candidates, found ${siblingCount}.`);
 if (page.includes('character-input') || page.includes('entry-section')) errors.push('Manual third-character input must be removed.');

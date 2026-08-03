@@ -50,7 +50,7 @@ const candidates = [
   { char: '鉴', group: '金', jyutping: 'Gaam3', bazi: 27, meaning: 27, sound: 24, brother: 0, meaningText: '鉴有明察、借鉴与鉴照之意，寓意明辨笃行。', soundText: 'Au1 Zeon3 Gaam3：长元音沉稳，风格端庄。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '铿', group: '金', jyutping: 'Hang1', bazi: 27, meaning: 25, sound: 24, brother: 0, meaningText: '铿取铿锵之声，寓意坚定、清越、有精神。', soundText: 'Au1 Zeon3 Hang1：声母清楚，气质鲜明。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '思', group: '金', jyutping: 'Si1', bazi: 29, meaning: 28, sound: 26, brother: 0, meaningText: '思有思考、慎思与念亲之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Si1：高平调清楚，文雅顺口。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
-  { char: '诗', group: '金', jyutping: 'Si1', bazi: 28, meaning: 28, sound: 26, brother: 0, meaningText: '诗有诗意、才情与审美之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Si1：音色清亮，整体斯文。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
+  { char: '宗', group: '金', jyutping: 'Zung1', bazi: 28, meaning: 27, sound: 26, brother: 0, meaningText: '宗有宗旨、传承与敬本之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Zung1：高平鼻尾稳健，整体端正。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '新', group: '金', jyutping: 'San1', bazi: 28, meaning: 27, sound: 27, brother: 0, meaningText: '新有更新、开端与进取之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 San1：高平调明快，辨识度好。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '辛', group: '金', jyutping: 'San1', bazi: 27, meaning: 24, sound: 25, brother: 0, meaningText: '辛有勤勉、坚忍之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 San1：短音清晰，风格简练。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '成', group: '金', jyutping: 'Sing4', bazi: 28, meaning: 28, sound: 27, brother: 0, meaningText: '成有成就、成熟与成全之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Sing4：鼻尾舒展，读感稳妥。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
@@ -60,7 +60,7 @@ const candidates = [
   { char: '川', group: '金', jyutping: 'Cyun1', bazi: 27, meaning: 25, sound: 27, brother: 0, meaningText: '川有通达、开阔与山川气象之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Cyun1：高平调清脆，读感利落。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '初', group: '金', jyutping: 'Co1', bazi: 27, meaning: 26, sound: 27, brother: 0, meaningText: '初有初心、纯粹与起步之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Co1：开口音明快，听感轻盈。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '靖', group: '金', jyutping: 'Zing6', bazi: 27, meaning: 27, sound: 25, brother: 0, meaningText: '靖有安靖、平和与守正之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Zing6：尾调沉着，整体稳重。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
-  { char: '静', group: '金', jyutping: 'Zing6', bazi: 27, meaning: 27, sound: 25, brother: 0, meaningText: '静有宁静、专注与从容之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Zing6：音节收束稳，气质安定。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
+  { char: '毅', group: '金', jyutping: 'Ngai6', bazi: 28, meaning: 29, sound: 25, brother: 0, meaningText: '毅有坚毅、果断与担当之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Ngai6：鼻音起首稳重，力量感清晰。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '信', group: '金', jyutping: 'Seon3', bazi: 28, meaning: 28, sound: 26, brother: 0, meaningText: '信有诚信、信念与可靠之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Seon3：收尾清楚，名字感端正。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '宣', group: '金', jyutping: 'Syun1', bazi: 27, meaning: 26, sound: 27, brother: 0, meaningText: '宣有明达、传播与舒展之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Syun1：圆唇高平，音律清亮。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '星', group: '金', jyutping: 'Sing1', bazi: 28, meaning: 27, sound: 27, brother: 0, meaningText: '星有光亮、方向与希望之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Sing1：高平调明亮，朗朗上口。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
@@ -78,13 +78,13 @@ const candidates = [
   { char: '冰', group: '水', jyutping: 'Bing1', bazi: 29, meaning: 26, sound: 27, brother: 0, meaningText: '冰有清澈、坚定与纯净之意，气质清爽。', soundText: 'Au1 Zeon3 Bing1：高平调明亮，听感清脆。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '雨', group: '水', jyutping: 'Jyu5', bazi: 29, meaning: 27, sound: 27, brother: 0, meaningText: '雨有滋润、恩泽与生机之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Jyu5：圆唇尾音柔和，清雅顺口。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '云', group: '水', jyutping: 'Wan4', bazi: 28, meaning: 27, sound: 26, brother: 0, meaningText: '云有高远、自在与变幻之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Wan4：鼻尾舒展，整体温润。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
-  { char: '雪', group: '水', jyutping: 'Syut3', bazi: 28, meaning: 28, sound: 25, brother: 0, meaningText: '雪有纯净、明澈与高洁之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Syut3：入声清脆，辨识度高。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
-  { char: '露', group: '水', jyutping: 'Lou6', bazi: 28, meaning: 27, sound: 26, brother: 0, meaningText: '露有清新、显现与润泽之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Lou6：长元音舒展，听感明亮。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
+  { char: '学', group: '水', jyutping: 'Hok6', bazi: 28, meaning: 29, sound: 25, brother: 0, meaningText: '学有求知、积累与进益之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Hok6：入声收尾清楚，书卷气浓。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
+  { char: '怀', group: '水', jyutping: 'Waai4', bazi: 28, meaning: 28, sound: 26, brother: 0, meaningText: '怀有胸怀、怀志与包容之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Waai4：长元音舒展，整体温厚。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '霜', group: '水', jyutping: 'Soeng1', bazi: 27, meaning: 25, sound: 26, brother: 0, meaningText: '霜有清峻、坚洁与沉静之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Soeng1：高平调清楚，气质清冷。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
-  { char: '霞', group: '水', jyutping: 'Haa4', bazi: 28, meaning: 28, sound: 27, brother: 0, meaningText: '霞有霞光、绚丽与希望之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Haa4：长元音舒展，叫名明快。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
-  { char: '雯', group: '水', jyutping: 'Man4', bazi: 27, meaning: 27, sound: 26, brother: 0, meaningText: '雯有云彩纹理、文采与雅致之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Man4：鼻尾柔和，整体斯文。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
-  { char: '霏', group: '水', jyutping: 'Fei1', bazi: 27, meaning: 26, sound: 27, brother: 0, meaningText: '霏有轻盈、细雨与温柔之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Fei1：高平调清亮，音色轻盈。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
-  { char: '霓', group: '水', jyutping: 'Ngai4', bazi: 27, meaning: 27, sound: 25, brother: 0, meaningText: '霓有彩虹、光彩与希望之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Ngai4：鼻音起首特别，辨识度高。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
+  { char: '武', group: '水', jyutping: 'Mou5', bazi: 27, meaning: 27, sound: 25, brother: 0, meaningText: '武有勇毅、担当与文武兼备之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Mou5：圆唇尾音稳，气质有力量。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
+  { char: '孝', group: '水', jyutping: 'Haau3', bazi: 27, meaning: 28, sound: 25, brother: 0, meaningText: '孝有敬亲、知恩与责任感之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Haau3：开口音清晰，读感真诚。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
+  { char: '平', group: '水', jyutping: 'Ping4', bazi: 27, meaning: 27, sound: 26, brother: 0, meaningText: '平有平和、平正与安定之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Ping4：鼻尾舒展，整体平稳。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
+  { char: '华', group: '水', jyutping: 'Waa4', bazi: 27, meaning: 27, sound: 26, brother: 0, meaningText: '华有光华、才华与繁盛之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Waa4：长元音温厚，读感大方。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '霄', group: '水', jyutping: 'Siu1', bazi: 28, meaning: 26, sound: 27, brother: 0, meaningText: '霄有云霄、高远与志向之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Siu1：高平调明亮，叫名轻快。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '霆', group: '水', jyutping: 'Ting4', bazi: 27, meaning: 25, sound: 25, brother: 0, meaningText: '霆有雷霆、声势与果断之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Ting4：鼻尾稳重，力量感较强。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '霁', group: '水', jyutping: 'Zai3', bazi: 27, meaning: 27, sound: 25, brother: 0, meaningText: '霁有雨后初晴、澄明与开朗之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Zai3：短促清晰，整体利落。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
@@ -99,7 +99,7 @@ const candidates = [
   { char: '鸣', group: '水', jyutping: 'Ming4', bazi: 28, meaning: 27, sound: 26, brother: 0, meaningText: '鸣有鸣志、声名与表达之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Ming4：鼻尾清楚，读感斯文。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '斌', group: '水', jyutping: 'Ban1', bazi: 27, meaning: 27, sound: 25, brother: 0, meaningText: '斌有文武兼备、才德并重之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Ban1：高平调明快，叫名利落。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '子', group: '水', jyutping: 'Zi2', bazi: 28, meaning: 27, sound: 27, brother: 0, meaningText: '子有聪慧、传承与谦雅之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Zi2：高调收束清楚，音律轻巧。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
-  { char: '贝', group: '水', jyutping: 'Bui3', bazi: 27, meaning: 26, sound: 26, brother: 0, meaningText: '贝有珍贵、财富与温润之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Bui3：圆唇尾音柔和，听感亲切。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
+  { char: '品', group: '水', jyutping: 'Ban2', bazi: 27, meaning: 28, sound: 25, brother: 0, meaningText: '品有品格、品行与涵养之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Ban2：鼻尾上扬，整体端正。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '含', group: '水', jyutping: 'Ham4', bazi: 28, meaning: 27, sound: 26, brother: 0, meaningText: '含有包容、含章与内敛之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Ham4：鼻尾温润，整体斯文。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
 
   { char: '珩', group: '金', jyutping: 'Hang4', bazi: 27, meaning: 27, sound: 25, brother: 0, meaningText: '珩为佩玉，寓意端正、温润与有品，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Hang4：鼻尾稳重，读感清雅。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
@@ -110,9 +110,9 @@ const candidates = [
   { char: '瑾', group: '金', jyutping: 'Gan2', bazi: 28, meaning: 29, sound: 25, brother: 0, meaningText: '瑾有美玉之德，寓意谨慎、厚德与光明，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Gan2：上扬收束清楚，气质雅正。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '瑜', group: '金', jyutping: 'Jyu4', bazi: 28, meaning: 28, sound: 26, brother: 0, meaningText: '瑜指美玉光彩，也有瑕不掩瑜之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Jyu4：圆唇舒展，读感温和。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '玮', group: '金', jyutping: 'Wai5', bazi: 27, meaning: 27, sound: 25, brother: 0, meaningText: '玮有珍奇、美好与器度之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Wai5：圆唇尾音柔和，整体稳重。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
-  { char: '玥', group: '金', jyutping: 'Jyut6', bazi: 27, meaning: 27, sound: 25, brother: 0, meaningText: '玥为传说中的神珠，寓意珍贵、清明与守护，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Jyut6：入声收尾利落，辨识度高。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
+  { char: '珏', group: '金', jyutping: 'Gok3', bazi: 27, meaning: 27, sound: 25, brother: 0, meaningText: '珏为双玉合一，寓意成对、圆融与珍贵，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Gok3：入声收尾干净，辨识度高。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '佩', group: '金', jyutping: 'Pui3', bazi: 27, meaning: 26, sound: 26, brother: 0, meaningText: '佩有佩玉、敬佩与端庄之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Pui3：圆唇尾音轻快，叫名亲切。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
-  { char: '珊', group: '金', jyutping: 'Saan1', bazi: 27, meaning: 27, sound: 26, brother: 0, meaningText: '珊有珊瑚、清秀与珍美之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Saan1：鼻尾清晰，音色明亮。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
+  { char: '璜', group: '金', jyutping: 'Wong4', bazi: 27, meaning: 26, sound: 25, brother: 0, meaningText: '璜为古玉器，寓意礼度、稳重与君子之风，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Wong4：尾音舒展，整体厚重。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '珑', group: '金', jyutping: 'Lung4', bazi: 27, meaning: 26, sound: 25, brother: 0, meaningText: '珑有玲珑、通透与灵秀之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Lung4：鼻尾饱满，整体灵动。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '璟', group: '金', jyutping: 'Ging2', bazi: 27, meaning: 28, sound: 25, brother: 0, meaningText: '璟指玉的光彩，寓意明亮、温润与有才，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Ging2：上扬收尾清楚，听感清俊。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '璋', group: '金', jyutping: 'Zoeng1', bazi: 27, meaning: 27, sound: 25, brother: 0, meaningText: '璋为玉器，寓意礼仪、端正与君子之风，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Zoeng1：高平调明亮，气质端庄。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
@@ -123,12 +123,12 @@ const candidates = [
   { char: '玠', group: '金', jyutping: 'Gaai3', bazi: 26, meaning: 25, sound: 24, brother: 0, meaningText: '玠为玉器名，寓意持守、端正与礼度，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Gaai3：开口音明快，辨识度高。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '玺', group: '金', jyutping: 'Saai2', bazi: 27, meaning: 27, sound: 25, brother: 0, meaningText: '玺为印信，寓意信守、权衡与责任，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Saai2：上扬转折清楚，读感利落。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '玖', group: '金', jyutping: 'Gau2', bazi: 27, meaning: 26, sound: 25, brother: 0, meaningText: '玖为美玉之数，寓意长久、珍贵与圆满，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Gau2：圆唇上扬，音色明亮。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
-  { char: '玲', group: '金', jyutping: 'Ling4', bazi: 27, meaning: 27, sound: 26, brother: 0, meaningText: '玲有玲珑、清越与灵秀之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Ling4：鼻尾清楚，读感灵动。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
+  { char: '珀', group: '金', jyutping: 'Paak3', bazi: 27, meaning: 26, sound: 25, brother: 0, meaningText: '珀有琥珀、沉稳与温润之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Paak3：入声利落，音色沉着。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '颖', group: '金', jyutping: 'Wing6', bazi: 28, meaning: 29, sound: 25, brother: 0, meaningText: '颖有聪颖、出众与才华初露之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Wing6：鼻尾下落，声音稳妥。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '纯', group: '金', jyutping: 'Seon4', bazi: 27, meaning: 28, sound: 25, brother: 0, meaningText: '纯有纯正、真诚与不杂之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Seon4：圆唇尾音柔和，整体斯文。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '琰', group: '金', jyutping: 'Jim5', bazi: 27, meaning: 26, sound: 25, brother: 0, meaningText: '琰有美玉与光彩之意，寓意明亮、温润与才情，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Jim5：鼻尾舒展，气质温和。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
-  { char: '瑶', group: '金', jyutping: 'Jiu4', bazi: 28, meaning: 28, sound: 26, brother: 0, meaningText: '瑶指美玉，寓意珍美、纯净与光明，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Jiu4：圆唇舒展，音色雅致。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
-  { char: '琬', group: '金', jyutping: 'Wun2', bazi: 27, meaning: 27, sound: 25, brother: 0, meaningText: '琬为温润之玉，寓意柔和、端庄与有分寸，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Wun2：圆唇上扬，听感温润。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
+  { char: '琅', group: '金', jyutping: 'Long4', bazi: 28, meaning: 27, sound: 25, brother: 0, meaningText: '琅有琅琅、玉声与清朗之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Long4：长元音舒展，读感响亮。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
+  { char: '璨', group: '金', jyutping: 'Caan3', bazi: 27, meaning: 27, sound: 25, brother: 0, meaningText: '璨有璀璨、明亮与才华显现之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Caan3：短促清晰，名字感利落。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '瑗', group: '金', jyutping: 'Jyun6', bazi: 27, meaning: 26, sound: 24, brother: 0, meaningText: '瑗为大孔之玉，寓意宽厚、周全与珍贵，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Jyun6：鼻尾下落，读感稳重。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '璇', group: '金', jyutping: 'Syun4', bazi: 27, meaning: 28, sound: 26, brother: 0, meaningText: '璇有美玉、星璇与聪慧之意，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Syun4：圆唇舒展，音律清雅。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '琮', group: '金', jyutping: 'Cung4', bazi: 27, meaning: 26, sound: 25, brother: 0, meaningText: '琮为古玉器，寓意礼序、端方与内涵，传统姓名学常作金性参考。', soundText: 'Au1 Zeon3 Cung4：鼻尾饱满，整体端正。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
@@ -157,9 +157,9 @@ const candidates = [
   { char: '斐', group: '水', jyutping: 'Fei2', bazi: 27, meaning: 27, sound: 25, brother: 0, meaningText: '斐有文采、斐然与明丽之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Fei2：上扬收尾清楚，音色明亮。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '翰', group: '水', jyutping: 'Hon6', bazi: 28, meaning: 28, sound: 25, brother: 0, meaningText: '翰有翰墨、才学与远志之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Hon6：收尾沉稳，书卷气浓。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '灵', group: '水', jyutping: 'Ling4', bazi: 28, meaning: 28, sound: 26, brother: 0, meaningText: '灵有灵秀、机敏与生动之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Ling4：鼻尾清楚，读感灵动。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
-  { char: '盈', group: '水', jyutping: 'Jing4', bazi: 28, meaning: 28, sound: 25, brother: 0, meaningText: '盈有充盈、圆满与从容之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Jing4：鼻尾舒展，整体温和。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
-  { char: '曼', group: '水', jyutping: 'Maan6', bazi: 27, meaning: 27, sound: 25, brother: 0, meaningText: '曼有舒缓、优雅与绵长之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Maan6：长元音下落，音色柔和。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
-  { char: '妍', group: '水', jyutping: 'Jin4', bazi: 27, meaning: 27, sound: 25, brother: 0, meaningText: '妍有美好、明媚与灵巧之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Jin4：鼻尾柔和，整体清雅。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
+  { char: '远', group: '水', jyutping: 'Jyun5', bazi: 28, meaning: 28, sound: 25, brother: 0, meaningText: '远有远志、远见与格局开阔之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Jyun5：鼻尾上扬，整体开阔。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
+  { char: '朋', group: '水', jyutping: 'Pang4', bazi: 27, meaning: 26, sound: 25, brother: 0, meaningText: '朋有友朋、相助与信义之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Pang4：鼻尾饱满，读感亲和。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
+  { char: '禹', group: '水', jyutping: 'Jyu5', bazi: 28, meaning: 28, sound: 25, brother: 0, meaningText: '禹有治水、担当与坚毅开拓之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Jyu5：圆唇收尾柔和，气质沉稳。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '欢', group: '水', jyutping: 'Fun1', bazi: 27, meaning: 28, sound: 26, brother: 0, meaningText: '欢有喜悦、和乐与亲和之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Fun1：高平调明快，叫名亲切。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '映', group: '水', jyutping: 'Jing2', bazi: 27, meaning: 26, sound: 25, brother: 0, meaningText: '映有照见、呼应与光影之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Jing2：上扬收尾清亮，读感利落。', brotherText: '暂未发现与“恺”构成的自然正向词语。' },
   { char: '梦', group: '水', jyutping: 'Mung6', bazi: 27, meaning: 28, sound: 25, brother: 0, meaningText: '梦有愿景、想象与追求之意，传统姓名学常作水性参考。', soundText: 'Au1 Zeon3 Mung6：鼻尾下落，气质温厚。', brotherText: '暂未发现与“恺”构成的自然正向词语。' }
@@ -233,6 +233,7 @@ const voteSubmit = document.querySelector('#vote-submit');
 const voteClear = document.querySelector('#vote-clear');
 const voteStatus = document.querySelector('#vote-status');
 const voteConfig = window.NAME_VOTE_CONFIG || { supabaseUrl: '', supabaseAnonKey: '', table: 'name_votes', storageKey: 'ou-jin-name-vote-v1' };
+const VOTE_LIMIT = 5;
 let selectedCharacter = '旋';
 let voteChoices = [];
 
@@ -302,7 +303,7 @@ function setVoteStatus(message, state = '') {
 function renderVoteSelection() {
   const submitted = hasSubmittedVote();
   const currentIsSelected = voteChoices.includes(selectedCharacter);
-  voteProgress.textContent = `已选 ${voteChoices.length}/3`;
+  voteProgress.textContent = `已选 ${voteChoices.length}/${VOTE_LIMIT}`;
   document.querySelectorAll('.candidate').forEach((button) => {
     button.classList.toggle('vote-selected', voteChoices.includes(button.dataset.char));
   });
@@ -310,8 +311,8 @@ function renderVoteSelection() {
     ? voteChoices.map((character) => `<span class="vote-chip">区晋${character}<button type="button" data-remove-vote="${character}" aria-label="移除区晋${character}"${submitted ? ' disabled' : ''}>×</button></span>`).join('')
     : '<span class="vote-empty">还没有选择。请先点击字库中的名字查看评分。</span>';
   voteAddCurrent.textContent = currentIsSelected ? `移除区晋${selectedCharacter}` : `加入区晋${selectedCharacter}`;
-  voteAddCurrent.disabled = submitted || (!currentIsSelected && voteChoices.length >= 3);
-  voteSubmit.disabled = submitted || voteChoices.length !== 3;
+  voteAddCurrent.disabled = submitted || (!currentIsSelected && voteChoices.length >= VOTE_LIMIT);
+  voteSubmit.disabled = submitted || voteChoices.length !== VOTE_LIMIT;
   voteClear.disabled = submitted || voteChoices.length === 0;
   if (submitted) {
     setVoteStatus('这台设备已经提交过投票，感谢参与。', 'is-success');
@@ -324,12 +325,12 @@ function toggleVoteChoice() {
   if (index >= 0) {
     voteChoices.splice(index, 1);
     setVoteStatus('已移除当前名字，请继续选择。');
-  } else if (voteChoices.length >= 3) {
-    setVoteStatus('最多只能选择 3 个名字。', 'is-error');
+  } else if (voteChoices.length >= VOTE_LIMIT) {
+    setVoteStatus(`最多只能选择 ${VOTE_LIMIT} 个名字。`, 'is-error');
     return;
   } else {
     voteChoices.push(selectedCharacter);
-    setVoteStatus(`已加入区晋${selectedCharacter}，还可以选择 ${3 - voteChoices.length} 个。`);
+    setVoteStatus(`已加入区晋${selectedCharacter}，还可以选择 ${VOTE_LIMIT - voteChoices.length} 个。`);
   }
   renderVoteSelection();
 }
@@ -344,7 +345,7 @@ function removeVoteChoice(character) {
 function clearVoteChoices() {
   if (hasSubmittedVote()) return;
   voteChoices = [];
-  setVoteStatus('已清空选择，请重新挑选 3 个名字。');
+  setVoteStatus(`已清空选择，请重新挑选 ${VOTE_LIMIT} 个名字。`);
   renderVoteSelection();
 }
 
@@ -355,8 +356,8 @@ function createVoteId() {
 
 async function submitVote() {
   if (hasSubmittedVote()) return;
-  if (voteChoices.length !== 3) {
-    setVoteStatus('请先选择 3 个不同的名字。', 'is-error');
+  if (voteChoices.length !== VOTE_LIMIT) {
+    setVoteStatus(`请先选择 ${VOTE_LIMIT} 个不同的名字。`, 'is-error');
     return;
   }
   if (!voteConfig.supabaseUrl || !voteConfig.supabaseAnonKey) {
@@ -387,7 +388,9 @@ async function submitVote() {
         vote_id: payload.voteId,
         selection_1: payload.selections[0],
         selection_2: payload.selections[1],
-        selection_3: payload.selections[2]
+        selection_3: payload.selections[2],
+        selection_4: payload.selections[3],
+        selection_5: payload.selections[4]
       })
     });
     if (!response.ok) throw new Error(`vote request failed: ${response.status}`);

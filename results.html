@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123b37">
+  <title>区晋名字投票结果</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page-shell results-page">
+    <header class="hero">
+      <p class="eyebrow">亲友投票 · 汇总图表</p>
+      <h1>区晋名字投票结果</h1>
+      <p>只显示各名字的汇总票数，不显示任何原始投票记录。</p>
+      <a class="back-link" href="index.html">← 返回名字评分与投票</a>
+    </header>
+
+    <section class="results-dashboard" aria-labelledby="dashboard-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">实时统计</p>
+          <h2 id="dashboard-heading">大家最喜欢的名字</h2>
+        </div>
+        <button id="results-refresh" class="vote-clear" type="button">刷新数据</button>
+      </div>
+      <div class="results-summary">
+        <article><strong id="ballot-count">—</strong><span>已收集投票</span></article>
+        <article><strong id="selection-count">—</strong><span>累计名字票数</span></article>
+        <article><strong id="leader-name">—</strong><span>当前领先</span></article>
+      </div>
+      <p id="results-status" class="vote-status" aria-live="polite">正在读取投票结果……</p>
+      <div id="results-chart" class="results-chart" aria-live="polite"></div>
+    </section>
+  </main>
+  <script src="vote-config.js?v=20260802-2"></script>
+  <script src="results.js?v=20260803-1"></script>
+</body>
+</html>
