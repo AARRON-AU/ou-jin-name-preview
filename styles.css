@@ -223,6 +223,10 @@ section { margin: 0 0 30px; }
 .name-main-row .preview-actions { flex-wrap: nowrap; flex-shrink: 0; margin-top: 0; }
 .vote-section .vote-selection { display: flex; }
 
+/* 四项评分采用两列布局，移动端也保持两行，减少评分区高度。 */
+.breakdown { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+.score-row { grid-template-columns: 74px minmax(0, 1fr) 36px; gap: 7px; }
+
 @media (max-width: 480px) {
   .name-main-row { gap: 5px; }
   .name-main-row .full-name { font-size: 1.8rem; }
@@ -232,6 +236,9 @@ section { margin: 0 0 30px; }
   .name-main-row .vote-progress { display: none; }
   .vote-section .vote-selection { gap: 4px; min-height: 25px; }
   .vote-section .vote-chip { padding: 3px 6px 3px 8px; font-size: .84rem; }
+  .breakdown { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+  .score-row { grid-template-columns: 64px minmax(0, 1fr) 34px; gap: 5px; }
+  .score-label, .score-points { font-size: .68rem; }
   .vote-section { padding: 7px 12px 9px; }
   .vote-section .section-heading { margin-bottom: 5px; }
   .vote-section .results-link { margin-top: 5px; }

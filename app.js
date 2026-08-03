@@ -1300,7 +1300,8 @@ function renderVoteSelection() {
   voteSelection.innerHTML = voteChoices.length
     ? voteChoices.map((character) => `<span class="vote-chip">区晋${character}<button type="button" data-remove-vote="${character}" aria-label="移除区晋${character}"${submitted ? ' disabled' : ''}>×</button></span>`).join('')
     : '<span class="vote-empty">还没有选择。请先点击字库中的名字查看评分。</span>';
-  voteAddCurrent.textContent = currentIsSelected ? `移除区晋${selectedCharacter}` : `加入区晋${selectedCharacter}`;
+  voteAddCurrent.textContent = currentIsSelected ? `移除投票` : `加入投票`;
+  voteAddCurrent.setAttribute('aria-label', currentIsSelected ? `移除已选名字区晋${selectedCharacter}` : `加入投票区晋${selectedCharacter}`);
   voteAddCurrent.disabled = submitted || (!currentIsSelected && voteChoices.length >= VOTE_LIMIT);
   voteSubmit.disabled = submitted || voteChoices.length !== VOTE_LIMIT;
   voteClear.disabled = submitted || voteChoices.length === 0;
