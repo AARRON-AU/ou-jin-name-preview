@@ -3,34 +3,50 @@ import vm from 'node:vm';
 
 const source = fs.readFileSync(new URL('../app.js', import.meta.url), 'utf8');
 const page = fs.readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+const dictionaryText = fs.readFileSync(new URL('../区晋名字全部字库_可编辑.txt', import.meta.url), 'utf8');
+
+function parseDictionary(text) {
+  const sections = { 金字库: [], 水字库: [], 兄弟呼应字库: [] };
+  const duplicates = { 金字库: [], 水字库: [], 兄弟呼应字库: [] };
+  let current = null;
+  for (const raw of text.split(/\r?\n/)) {
+    const line = raw.trim();
+    if (!line || line.startsWith('#')) continue;
+    const header = line.match(/^【(.+)】$/);
+    if (header) {
+      current = header[1];
+      continue;
+    }
+    if (!current || !sections[current]) continue;
+    if ([...line].length !== 1 || !/\p{Script=Han}/u.test(line)) continue;
+    if (sections[current].includes(line)) duplicates[current].push(line);
+    else sections[current].push(line);
+  }
+  return { sections, duplicates };
+}
+
 const dataSource = source.slice(0, source.indexOf('const candidateMap'))
-  .replace('const candidates =', 'globalThis.candidates =');
+  .replace('const candidates =', 'globalThis.candidates =')
+  .replace('const siblingCandidates =', 'globalThis.siblingCandidates =');
 const sandbox = {};
 vm.createContext(sandbox);
 vm.runInContext(dataSource, sandbox);
 
-const { candidates } = sandbox;
+const { candidates, siblingCandidates } = sandbox;
+const { sections } = parseDictionary(dictionaryText);
 const errors = [];
 const byChar = new Map(candidates.map((item) => [item.char, item]));
-
-if (candidates.length !== 160) errors.push(`Expected 160 candidates, found ${candidates.length}.`);
-if (byChar.size !== 160) errors.push('Candidate characters must be unique.');
-if (candidates.filter((item) => item.group === '金').length !== 80) errors.push('金字库 must contain 80 candidates.');
-if (candidates.filter((item) => item.group === '水').length !== 80) errors.push('水字库 must contain 80 candidates.');
 const goldChars = candidates.filter((item) => item.group === '金').map((item) => item.char);
 const waterChars = candidates.filter((item) => item.group === '水').map((item) => item.char);
-const goldPrefix = ['旋', '铎', '钧', '铭', '铮', '锐', '锡', '铨', '钊', '钰', '锴', '锟', '镕', '锵', '钟', '锋', '鑫', '锦', '钦', '铠', '镇', '铸', '镜', '鉴', '铿'];
-const waterPrefix = ['风', '泓', '泽', '湛', '涵', '淳', '渊', '澜', '瀚', '源', '浩', '沛', '潇', '澈', '清', '润', '洋', '航', '沅', '洵', '淮', '沐', '澍', '溯', '冰'];
-if (goldChars.slice(0, 25).join('') !== goldPrefix.join('')) errors.push('金字库前25个字必须保持不变。');
-if (waterChars.slice(0, 25).join('') !== waterPrefix.join('')) errors.push('水字库前25个字必须保持不变。');
-if (goldChars.slice(25).some((char) => /[金钅釒]/u.test(char))) errors.push('金字库后25个字不应硬性使用金字旁。');
-if (waterChars.slice(25).some((char) => /[水氵]/u.test(char))) errors.push('水字库后25个字不应硬性使用三点水。');
+const siblingChars = siblingCandidates.map((item) => item.char);
+
+if (byChar.size !== candidates.length) errors.push('金字库和水字库不能出现重复候选字。');
+if (goldChars.join('') !== sections.金字库.join('')) errors.push('网页金字库与可编辑 TXT 不一致。');
+if (waterChars.join('') !== sections.水字库.join('')) errors.push('网页水字库与可编辑 TXT 不一致。');
+if (siblingChars.join('') !== sections.兄弟呼应字库.join('')) errors.push('网页兄弟呼应字库与可编辑 TXT 不一致。');
 if (candidates.some((item) => item.char === '霖')) errors.push('霖字必须排除。');
-for (const feminine of ['诗', '静', '玥', '珊', '玲', '瑶', '琬', '雪', '露', '霞', '雯', '霏', '霓', '贝', '盈', '曼', '妍']) {
-  if (byChar.has(feminine)) errors.push(`明显偏女性化字 ${feminine} 应已替换。`);
-}
-const siblingCount = source.split('siblingItem(').length - 2;
-if (siblingCount !== 30) errors.push(`Expected 30 sibling candidates, found ${siblingCount}.`);
+if (!source.includes(`let selectedCharacter = '${goldChars[0]}'`)) errors.push('默认选中字应跟随金字库第一个字。');
+
 if (page.includes('character-input') || page.includes('entry-section')) errors.push('Manual third-character input must be removed.');
 if (page.includes('mandarin-speak') || source.includes('playMandarinAudio') || source.includes('translate.google.com/translate_tts')) errors.push('Mandarin speech button and online audio must be removed.');
 if (!page.includes('cantonese-speak') || !source.includes('function speakCantonese')) errors.push('Cantonese speech control is missing.');
@@ -39,26 +55,26 @@ if (!source.includes("'yue-hk'")) errors.push('Cantonese voice aliases are incom
 if (!source.includes('window.speechSynthesis.cancel();')) errors.push('Speech must cancel an older utterance before selecting a new voice.');
 if (!source.includes('speechStatus.textContent')) errors.push('Speech voice diagnostics are missing.');
 
-for (const item of candidates) {
-  const total = item.bazi + item.meaning + item.sound + item.brother;
+for (const item of [...candidates, ...siblingCandidates]) {
   const meaning = Math.min(item.meaning, 25);
-  const brother = Math.min(item.brother * 1.5, 15);
-  if (item.bazi > 30 || item.meaning < 0 || item.sound > 30 || item.brother > 15) {
+  const brother = Math.min(Math.round(item.brother * 1.5), 15);
+  if (item.bazi > 30 || item.bazi < 0 || item.meaning < 0 || item.sound > 30 || item.sound < 0 || item.brother > 15 || item.brother < 0) {
     errors.push(`${item.char} exceeds a category maximum.`);
   }
   if (item.bazi + meaning + item.sound + brother > 100) errors.push(`${item.char} exceeds 100 points.`);
+  for (const field of ['jyutping', 'meaningText', 'soundText', 'brotherText']) {
+    if (!item[field]) errors.push(`${item.char} is missing ${field}.`);
+  }
 }
 
 for (const expected of [
-  ['旋', 10, '凯旋'],
-  ['风', 10, '凯风']
+  ['风', '凯风'],
+  ['瑞', '凯瑞'],
 ]) {
-  const [character, brotherScore, phrase] = expected;
-  const item = byChar.get(character);
+  const [character, phrase] = expected;
+  const item = byChar.get(character) || siblingCandidates.find((candidate) => candidate.char === character);
   if (!item) errors.push(`Missing ${character}.`);
-  else if (item.brother !== brotherScore || !item.brotherText.includes(phrase)) {
-    errors.push(`${character} does not have the expected brother-name association.`);
-  }
+  else if (!item.brotherText.includes(phrase)) errors.push(`${character} does not have the expected brother-name association.`);
 }
 
 if (errors.length) {
@@ -66,4 +82,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Verified 80 金 candidates, 80 水 candidates, 30 sibling candidates; scoring caps are valid.`);
+console.log(`Verified ${goldChars.length} 金 candidates, ${waterChars.length} 水 candidates, ${siblingChars.length} sibling candidates; scoring caps are valid.`);
