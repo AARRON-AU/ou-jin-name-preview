@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#123b37">
-  <title>区晋名字预览</title>
-  <link rel="stylesheet" href="styles.css?v=20260803-4">
+  <title>名字评分</title>
+  <link rel="stylesheet" href="styles.css?v=20260803-5">
 </head>
 <body>
   <main class="page-shell">
     <header class="hero">
-      <p class="eyebrow">名字预览 · 粤语地区</p>
-      <h1>区晋名字评分</h1>
+      <p class="eyebrow">名字评分 · 粤语地区</p>
+      <h1>名字评分</h1>
       <p>固定前缀“区晋”，挑一个末字，看看名字的整体感觉。</p>
     </header>
 
@@ -21,13 +21,15 @@
         <p id="name-heading" class="section-label">正在预览</p>
         <output id="name-display" class="full-name" aria-live="polite">区晋旋</output>
         <p id="cantonese-reading" class="reading">粤语：Au1 Zeon3 Syun4</p>
-        <div class="speech-actions" aria-label="朗读名字">
-          <button id="cantonese-speak" class="speech-button" type="button">粤语读音</button>
-        </div>
         <p id="speech-status" class="speech-status" aria-live="polite">粤语按钮使用设备粤语语音。</p>
-        <div class="vote-add-row">
-          <button id="vote-add-current" class="vote-add-button" type="button">加入区晋旋</button>
-          <span id="vote-progress" class="vote-progress">已选 0/5</span>
+        <div class="preview-actions">
+          <div class="speech-actions" aria-label="朗读名字">
+            <button id="cantonese-speak" class="speech-button" type="button">粤语读音</button>
+          </div>
+          <div class="vote-add-row">
+            <button id="vote-add-current" class="vote-add-button" type="button">加入区晋旋</button>
+            <span id="vote-progress" class="vote-progress">已选 0/5</span>
+          </div>
         </div>
       </div>
       <div class="score-orb" aria-label="总分 97 分">
@@ -38,12 +40,11 @@
     <section class="vote-section" aria-labelledby="vote-heading">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">亲友投票</p>
           <h2 id="vote-heading">选出你最喜欢的 5 个名字</h2>
         </div>
         <span class="vote-limit">匿名 · 每台设备一次</span>
       </div>
-      <p class="vote-intro">先在下方字库查看评分，再点击上方“加入”按钮。五个名字不分先后，每个名字计 1 票。</p>
+      <p class="vote-intro">请选择 5 个名字后提交。</p>
       <div id="vote-selection" class="vote-selection" aria-live="polite"></div>
       <div class="vote-actions">
         <button id="vote-submit" class="vote-submit" type="button" disabled>提交 5 个选择</button>

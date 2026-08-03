@@ -204,6 +204,27 @@ section { margin: 0 0 30px; }
   .notice { display: none; }
 }
 
+/* 投票区只保留标题、两个操作按钮和结果链接。 */
+.vote-section .vote-limit,
+.vote-section .vote-intro,
+.vote-section .vote-selection,
+.vote-section .vote-status { display: none; }
+.vote-section { padding-top: 10px; padding-bottom: 12px; }
+.vote-section .section-heading { margin-bottom: 8px; }
+.vote-section .vote-actions { margin-top: 0; }
+.vote-section .results-link { margin-top: 7px; }
+
+.preview-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 13px; }
+.preview-actions .speech-actions,
+.preview-actions .vote-add-row { margin-top: 0; }
+
+@media (max-width: 480px) {
+  .vote-section { padding: 7px 12px 9px; }
+  .vote-section .section-heading { margin-bottom: 5px; }
+  .vote-section .results-link { margin-top: 5px; }
+  .preview-actions { gap: 6px; margin-top: 6px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .candidate { transition: none; }
 }
