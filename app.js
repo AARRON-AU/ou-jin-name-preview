@@ -1238,7 +1238,7 @@ function buildCandidates() {
       const relationClass = relationship === 'strong' ? ' relationship-strong' : relationship === 'related' ? ' relationship-related' : '';
       return `<button class="candidate${relationClass}" type="button" data-char="${item.char}" aria-pressed="false" aria-label="选择 区晋${item.char}">${item.char}</button>`;
     }).join('');
-    return `<details class="candidate-group"${index < 2 ? ' open' : ''}><summary><h3 class="group-title">${group}字 <span>${elements[group]}</span></h3></summary><div class="candidate-grid">${buttons}</div></details>`;
+    return `<details class="candidate-group"><summary><h3 class="group-title">${group}字 <span>${elements[group]}</span></h3></summary><div class="candidate-grid">${buttons}</div></details>`;
   }).join('');
 }
 
